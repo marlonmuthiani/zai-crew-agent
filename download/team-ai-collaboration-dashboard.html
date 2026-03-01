@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team AI Collaboration Dashboard - 77 AI Providers</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e1e2e;
+            --darker: #181825;
+            --light: #cdd6f4;
+            --lighter: #f5f5f5;
+            --surface: #313244;
+            --surface-light: #45475a;
+            --text: #cdd6f4;
+            --text-muted: #a6adc8;
+            --border: #45475a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-2: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 360px;
+            grid-template-rows: 60px 1fr;
+            height: 100vh;
+            gap: 1px;
+            background: var(--border);
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-light);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .member-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .member-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .member-card:hover {
+            background: var(--surface-light);
+        }
+
+        .member-card.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .member-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .member-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .member-agent {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: var(--dark);
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .agent-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+        }
+
+        .agent-status.offline {
+            background: var(--text-muted);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--darker);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 16px 24px;
+            background: var(--dark);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-title h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .chat-title .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            background: var(--gradient-1);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.agent {
+            background: var(--surface);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .message-content {
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .chat-input-container {
+            padding: 16px 24px;
+            background: var(--dark);
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text);
+            font-size: 0.95rem;
+            resize: none;
+            min-height: 50px;
+            max-height: 150px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Right Panel */
+        .right-panel {
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-tab {
+            flex: 1;
+            padding: 14px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .panel-tab:hover {
+            color: var(--text);
+        }
+
+        .panel-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .panel-section {
+            margin-bottom: 20px;
+        }
+
+        .panel-section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tasks */
+        .task-item {
+            background: var(--surface);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+            border-left-color: var(--secondary);
+        }
+
+        .task-item.high {
+            border-left-color: var(--danger);
+        }
+
+        .task-item.medium {
+            border-left-color: var(--accent);
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Config Cards */
+        .config-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .config-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .config-card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .provider-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--dark);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.modal-lg {
+            max-width: 900px;
+        }
+
+        .modal.modal-xl {
+            max-width: 1100px;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+        }
+
+        .modal-body {
+            padding: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* Provider Selection */
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .provider-option {
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .provider-option:hover {
+            background: var(--surface-light);
+        }
+
+        .provider-option.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .provider-option-icon {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .provider-option-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .provider-category {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Provider Search */
+        .provider-search {
+            margin-bottom: 16px;
+        }
+
+        .provider-search input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .provider-search input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Provider Categories */
+        .provider-category-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin: 16px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface-light);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .empty-state-text {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Toggle Switch */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--surface);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: var(--primary);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active::after {
+            left: 23px;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--surface);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag-primary {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+        }
+
+        .tag-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .app-container {
+                grid-template-columns: 260px 1fr;
+            }
+            .right-panel {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+            .modal {
+                width: 95%;
+            }
+        }
+
+        /* Loading Animation */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 14px 18px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* Add Member Button */
+        .add-member-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-member-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Agent Config Badge */
+        .agent-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--primary-light);
+        }
+
+        /* API Key Status */
+        .api-key-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .api-key-status.configured {
+            color: var(--secondary);
+        }
+
+        .api-key-status.missing {
+            color: var(--accent);
+        }
+
+        .api-key-status.global {
+            color: var(--primary-light);
+        }
+
+        /* Provider Info */
+        .provider-info {
+            background: var(--darker);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+
+        .provider-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .provider-info-label {
+            color: var(--text-muted);
+        }
+
+        /* Tabs in Modal */
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .modal-tab {
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .modal-tab:hover {
+            color: var(--text);
+        }
+
+        .modal-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🤖</div>
+                <span class="logo-text">Team AI Hub</span>
+                <span class="tag tag-primary" style="margin-left: 8px;">77 Providers</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="openModal('settingsModal')">
+                    ⚙️ Settings
+                </button>
+                <button class="btn btn-primary" onclick="openModal('addMemberModal')">
+                    + Add Member
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar - Team Members -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Team Members</span>
+                <span class="tag tag-primary" id="memberCount">0</span>
+            </div>
+            <div class="member-list" id="memberList">
+                <!-- Members will be rendered here -->
+            </div>
+        </aside>
+
+        <!-- Main Content - Chat Interface -->
+        <main class="main-content">
+            <div class="chat-container" id="chatContainer">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-state-icon">👥</div>
+                    <h3 class="empty-state-title">Welcome to Team AI Hub</h3>
+                    <p class="empty-state-text">Select a team member to start collaborating with their AI agent, or add a new member to get started.</p>
+                    <button class="btn btn-primary" onclick="openModal('addMemberModal')">
+                        + Add Your First Member
+                    </button>
+                </div>
+                <div class="chat-header" id="chatHeader" style="display: none;">
+                    <div class="chat-title">
+                        <div class="member-avatar" id="activeMemberAvatar">AI</div>
+                        <div>
+                            <h2 id="activeMemberName">Select a Member</h2>
+                            <span class="subtitle" id="activeAgentInfo">Agent: None</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" onclick="openAgentConfig()">
+                        🎯 Configure Agent
+                    </button>
+                </div>
+                <div class="chat-messages" id="chatMessages" style="display: none;">
+                    <!-- Messages will be rendered here -->
+                </div>
+                <div class="chat-input-container" id="chatInputContainer" style="display: none;">
+                    <div class="chat-input-wrapper">
+                        <textarea class="chat-input" id="chatInput" placeholder="Type your message to the AI agent..." rows="1"></textarea>
+                        <button class="send-btn" onclick="sendMessage()">➤</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel - Tasks & Settings -->
+        <aside class="right-panel">
+            <div class="panel-tabs">
+                <button class="panel-tab active" onclick="switchTab('tasks')">📋 Tasks</button>
+                <button class="panel-tab" onclick="switchTab('activity')">📊 Activity</button>
+            </div>
+            <div class="panel-content" id="panelContent">
+                <!-- Tasks Panel -->
+                <div id="tasksPanel">
+                    <div class="panel-section">
+                        <div class="panel-section-title">Quick Stats</div>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalTasks">0</div>
+                                <div class="stat-label">Total Tasks</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="completedTasks">0</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-section">
+                        <div class="panel-section-title" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Active Tasks</span>
+                            <button class="btn btn-small btn-secondary" onclick="openModal('addTaskModal')">+ Add</button>
+                        </div>
+                        <div id="taskList">
+                            <!-- Tasks will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Activity Panel -->
+                <div id="activityPanel" style="display: none;">
+                    <div class="panel-section">
+                        <div class="panel-section-title">Recent Activity</div>
+                        <div id="activityList">
+                            <!-- Activity items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div class="modal-overlay" id="addMemberModal">
+        <div class="modal modal-xl">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Team Member</h3>
+                <button class="modal-close" onclick="closeModal('addMemberModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">Member Name *</label>
+                            <input type="text" class="form-input" id="newMemberName" placeholder="Enter member name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Role / Title</label>
+                            <input type="text" class="form-input" id="newMemberRole" placeholder="e.g., Developer, Designer, PM">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Agent Personality / System Prompt</label>
+                            <textarea class="form-textarea" id="newMemberSystemPrompt" placeholder="Define the agent's personality and behavior..."></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">Select AI Provider (77 Available)</label>
+                        <div class="provider-search">
+                            <input type="text" id="providerSearchInput" placeholder="🔍 Search providers..." oninput="filterProviders()">
+                        </div>
+                        <div class="provider-grid" id="providerGrid">
+                            <!-- Providers will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+                <div id="selectedProviderConfig" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <h4 style="margin-bottom: 16px;">Provider Configuration</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">API Key</label>
+                            <input type="password" class="form-input" id="newMemberApiKey" placeholder="Enter API key">
+                            <div class="api-key-status" id="apiKeyStatus"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Model</label>
+                            <select class="form-select" id="newMemberModel">
+                                <!-- Models will be populated based on provider -->
+                            </select>
+                        </div>
+                    </div>
+                    <div id="customEndpointSection" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Custom Endpoint URL</label>
+                            <input type="text" class="form-input" id="newMemberCustomEndpoint" placeholder="https://api.example.com/v1/chat/completions">
+                        </div>
+                    </div>
+                    <div class="provider-info" id="providerInfo">
+                        <!-- Provider info will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('addMemberModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addMember()">Add Member</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">Global Settings & API Keys</h3>
+                <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" onclick="switchSettingsTab('keys')">🔑 API Keys</button>
+                    <button class="modal-tab" onclick="switchSettingsTab('general')">⚙️ General</button>
+                    <button class="modal-tab" onclick="switchSettingsTab('data')">💾 Data</button>
+                </div>
+                
+                <!-- API Keys Tab -->
+                <div id="keysTab">
+                    <p style="color: var(--text-muted); margin-bottom: 16px;">Configure API keys for providers. These will be used as fallback when members don't have their own keys.</p>
+                    <div id="globalApiKeysContainer">
+                        <!-- API key inputs will be rendered here -->
+                    </div>
+                </div>
+                
+                <!-- General Tab -->
+                <div id="generalTab" style="display: none;">
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="config-card-title">🌐 Default Provider</span>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-select" id="defaultProvider">
+                                <!-- Will be populated -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="config-card-title">🎨 Appearance</span>
+                        </div>
+                        <div class="form-group">
+                            <div class="toggle-wrapper">
+                                <div class="toggle active" id="darkModeToggle" onclick="toggleDarkMode()"></div>
+                                <span>Dark Mode</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Tab -->
+                <div id="dataTab" style="display: none;">
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="config-card-title">💾 Data Management</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary" onclick="exportData()">📤 Export Data</button>
+                            <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Import Data</button>
+                            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+                            <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('settingsModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agent Config Modal -->
+    <div class="modal-overlay" id="agentConfigModal">
+        <div class="modal modal-xl">
+            <div class="modal-header">
+                <h3 class="modal-title">Configure Agent</h3>
+                <button class="modal-close" onclick="closeModal('agentConfigModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">Agent Name</label>
+                            <input type="text" class="form-input" id="agentName" placeholder="Give your agent a name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">System Prompt</label>
+                            <textarea class="form-textarea" id="agentSystemPrompt" rows="6" placeholder="Define how the AI should behave..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Temperature: <span id="tempValue">0.7</span></label>
+                            <input type="range" min="0" max="2" step="0.1" value="0.7" style="width: 100%;" id="agentTemperature" oninput="document.getElementById('tempValue').textContent = this.value">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Max Tokens</label>
+                            <input type="number" class="form-input" id="agentMaxTokens" value="4096" min="1" max="128000">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">Change Provider</label>
+                        <div class="provider-search">
+                            <input type="text" id="agentProviderSearch" placeholder="🔍 Search providers..." oninput="filterAgentProviders()">
+                        </div>
+                        <div class="provider-grid" id="agentProviderGrid" style="max-height: 280px;">
+                            <!-- Providers will be rendered here -->
+                        </div>
+                        <div id="agentProviderConfig" style="margin-top: 16px;">
+                            <div class="form-group">
+                                <label class="form-label">API Key (leave empty to use global key)</label>
+                                <input type="password" class="form-input" id="agentApiKey" placeholder="Enter API key or leave empty">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Model</label>
+                                <select class="form-select" id="agentModel">
+                                    <!-- Models populated based on provider -->
+                                </select>
+                            </div>
+                            <div id="agentCustomEndpointSection" style="display: none;">
+                                <div class="form-group">
+                                    <label class="form-label">Custom Endpoint URL</label>
+                                    <input type="text" class="form-input" id="agentCustomEndpoint" placeholder="https://api.example.com/v1/chat/completions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('agentConfigModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveAgentConfig()">Save Configuration</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal-overlay" id="addTaskModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Task</h3>
+                <button class="modal-close" onclick="closeModal('addTaskModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Task Title</label>
+                    <input type="text" class="form-input" id="taskTitle" placeholder="What needs to be done?">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="taskPriority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Assign To</label>
+                    <select class="form-select" id="taskAssignee">
+                        <option value="">Unassigned</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('addTaskModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 77 AI PROVIDERS CONFIGURATION
+        // ==========================================
+        
+        const AI_PROVIDERS = {
+            // ===== MAJOR CLOUD PROVIDERS =====
+            openai: {
+                name: 'OpenAI',
+                icon: '🟢',
+                category: 'Major Cloud',
+                endpoint: 'https://api.openai.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-4', 'gpt-3.5-turbo', 'o1', 'o1-mini', 'o1-preview'],
+                defaultModel: 'gpt-4o',
+                docs: 'https://platform.openai.com/api-keys'
+            },
+            anthropic: {
+                name: 'Anthropic',
+                icon: '🟣',
+                category: 'Major Cloud',
+                endpoint: 'https://api.anthropic.com/v1/messages',
+                authType: 'x-api-key',
+                keyPrefix: 'sk-ant-',
+                keyPlaceholder: 'sk-ant-...',
+                models: ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022', 'claude-3-opus-20240229', 'claude-3-sonnet-20240229', 'claude-3-haiku-20240307'],
+                defaultModel: 'claude-3-5-sonnet-20241022',
+                headers: { 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+                docs: 'https://console.anthropic.com/'
+            },
+            google: {
+                name: 'Google AI (Gemini)',
+                icon: '🔵',
+                category: 'Major Cloud',
+                endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
+                authType: 'query',
+                keyPrefix: 'AIza',
+                keyPlaceholder: 'AIza...',
+                models: ['gemini-2.0-flash-exp', 'gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-pro'],
+                defaultModel: 'gemini-2.0-flash-exp',
+                docs: 'https://aistudio.google.com/app/apikey'
+            },
+            
+            // ===== CHINESE AI PROVIDERS =====
+            deepseek: {
+                name: 'DeepSeek',
+                icon: '🔮',
+                category: 'Chinese AI',
+                endpoint: 'https://api.deepseek.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['deepseek-chat', 'deepseek-coder', 'deepseek-reasoner'],
+                defaultModel: 'deepseek-chat',
+                docs: 'https://platform.deepseek.com/'
+            },
+            moonshot: {
+                name: 'Moonshot AI (Kimi)',
+                icon: '🌙',
+                category: 'Chinese AI',
+                endpoint: 'https://api.moonshot.cn/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k'],
+                defaultModel: 'moonshot-v1-8k',
+                docs: 'https://platform.moonshot.cn/'
+            },
+            zhipu: {
+                name: 'Zhipu AI (GLM)',
+                icon: '💎',
+                category: 'Chinese AI',
+                endpoint: 'https://open.bigmodel.cn/api/paas/v4/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['glm-4', 'glm-4-flash', 'glm-4-plus', 'glm-4-long', 'glm-3-turbo'],
+                defaultModel: 'glm-4',
+                docs: 'https://open.bigmodel.cn/'
+            },
+            baichuan: {
+                name: 'Baichuan AI',
+                icon: '🌊',
+                category: 'Chinese AI',
+                endpoint: 'https://api.baichuan-ai.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['Baichuan4', 'Baichuan3-Turbo', 'Baichuan3-Turbo-128k', 'Baichuan2-Turbo'],
+                defaultModel: 'Baichuan4',
+                docs: 'https://platform.baichuan-ai.com/'
+            },
+            qwen: {
+                name: 'Alibaba Qwen',
+                icon: '🔷',
+                category: 'Chinese AI',
+                endpoint: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['qwen-turbo', 'qwen-plus', 'qwen-max', 'qwen-max-longcontext', 'qwen-long'],
+                defaultModel: 'qwen-max',
+                docs: 'https://dashscope.console.aliyun.com/'
+            },
+            baidu: {
+                name: 'Baidu ERNIE',
+                icon: '🔴',
+                category: 'Chinese AI',
+                endpoint: 'https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/{model}',
+                authType: 'query',
+                keyPrefix: '',
+                keyPlaceholder: 'Access Token',
+                models: ['ernie-4.0-8k', 'ernie-3.5-8k', 'ernie-speed-8k', 'ernie-lite-8k'],
+                defaultModel: 'ernie-4.0-8k',
+                docs: 'https://console.bce.baidu.com/qianfan/'
+            },
+            minimax: {
+                name: 'MiniMax',
+                icon: '⚡',
+                category: 'Chinese AI',
+                endpoint: 'https://api.minimax.chat/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['abab6.5-chat', 'abab6.5s-chat', 'abab5.5-chat', 'abab5.5s-chat'],
+                defaultModel: 'abab6.5-chat',
+                docs: 'https://api.minimax.chat/'
+            },
+            stepfun: {
+                name: 'StepFun',
+                icon: '🚀',
+                category: 'Chinese AI',
+                endpoint: 'https://api.stepfun.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['step-1-8k', 'step-1-32k', 'step-1-128k', 'step-1-256k'],
+                defaultModel: 'step-1-8k',
+                docs: 'https://platform.stepfun.com/'
+            },
+            '01ai': {
+                name: '01.AI (Yi)',
+                icon: '🎯',
+                category: 'Chinese AI',
+                endpoint: 'https://api.lingyiwanwu.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['yi-lightning', 'yi-large', 'yi-medium', 'yi-spark'],
+                defaultModel: 'yi-lightning',
+                docs: 'https://platform.lingyiwanwu.com/'
+            },
+            siliconflow: {
+                name: 'SiliconFlow',
+                icon: '💠',
+                category: 'Chinese AI',
+                endpoint: 'https://api.siliconflow.cn/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['deepseek-ai/DeepSeek-V3', 'Qwen/Qwen2.5-72B-Instruct', 'THUDM/glm-4-9b-chat'],
+                defaultModel: 'deepseek-ai/DeepSeek-V3',
+                docs: 'https://cloud.siliconflow.cn/'
+            },
+
+            // ===== MAJOR PLATFORMS =====
+            mistral: {
+                name: 'Mistral AI',
+                icon: '🌀',
+                category: 'Major Platforms',
+                endpoint: 'https://api.mistral.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest', 'open-mixtral-8x22b', 'open-mixtral-8x7b', 'mistral-7b'],
+                defaultModel: 'mistral-large-latest',
+                docs: 'https://console.mistral.ai/'
+            },
+            cohere: {
+                name: 'Cohere',
+                icon: '🔴',
+                category: 'Major Platforms',
+                endpoint: 'https://api.cohere.ai/v2/chat',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['command-r-plus-08-2024', 'command-r-08-2024', 'command-r-plus', 'command-r', 'command'],
+                defaultModel: 'command-r-plus-08-2024',
+                docs: 'https://dashboard.cohere.com/'
+            },
+            groq: {
+                name: 'Groq',
+                icon: '⚡',
+                category: 'Major Platforms',
+                endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'gsk_',
+                keyPlaceholder: 'gsk_...',
+                models: ['llama-3.3-70b-versatile', 'llama-3.1-70b-versatile', 'llama-3.1-8b-instant', 'mixtral-8x7b-32768', 'gemma2-9b-it'],
+                defaultModel: 'llama-3.3-70b-versatile',
+                docs: 'https://console.groq.com/'
+            },
+            xai: {
+                name: 'xAI (Grok)',
+                icon: '🦅',
+                category: 'Major Platforms',
+                endpoint: 'https://api.x.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'xai-',
+                keyPlaceholder: 'xai-...',
+                models: ['grok-beta', 'grok-2-1212', 'grok-2-vision-1212'],
+                defaultModel: 'grok-beta',
+                docs: 'https://console.x.ai/'
+            },
+            perplexity: {
+                name: 'Perplexity AI',
+                icon: '🔍',
+                category: 'Major Platforms',
+                endpoint: 'https://api.perplexity.ai/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'pplx-',
+                keyPlaceholder: 'pplx-...',
+                models: ['llama-3.1-sonar-large-128k-online', 'llama-3.1-sonar-small-128k-online', 'llama-3.1-sonar-large-128k-chat'],
+                defaultModel: 'llama-3.1-sonar-large-128k-online',
+                docs: 'https://www.perplexity.ai/settings/api'
+            },
+            meta: {
+                name: 'Meta (Llama API)',
+                icon: '📘',
+                category: 'Major Platforms',
+                endpoint: 'https://api.llama-api.com/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama3.1-405b', 'llama3.1-70b', 'llama3.1-8b', 'llama3-70b', 'llama3-8b'],
+                defaultModel: 'llama3.1-70b',
+                docs: 'https://llama-api.com/'
+            },
+
+            // ===== CLOUD GPU / INFERENCE =====
+            together: {
+                name: 'Together AI',
+                icon: '🤝',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.together.xyz/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['meta-llama/Llama-3.3-70B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo', 'Qwen/Qwen2.5-72B-Instruct-Turbo'],
+                defaultModel: 'meta-llama/Llama-3.3-70B-Instruct-Turbo',
+                docs: 'https://api.together.xyz/'
+            },
+            fireworks: {
+                name: 'Fireworks AI',
+                icon: '🎆',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.fireworks.ai/inference/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['accounts/fireworks/models/llama-v3p3-70b-instruct', 'accounts/fireworks/models/qwen2p5-72b-instruct', 'accounts/fireworks/models/deepseek-v3'],
+                defaultModel: 'accounts/fireworks/models/llama-v3p3-70b-instruct',
+                docs: 'https://fireworks.ai/'
+            },
+            replicate: {
+                name: 'Replicate',
+                icon: '🔄',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.replicate.com/v1/models/{model}/predictions',
+                authType: 'bearer',
+                keyPrefix: 'r8_',
+                keyPlaceholder: 'r8_...',
+                models: ['meta/llama-3.3-70b-instruct', 'meta/llama-3.1-405b-instruct', 'mistralai/mixtral-8x7b-instruct-v0.1'],
+                defaultModel: 'meta/llama-3.3-70b-instruct',
+                docs: 'https://replicate.com/'
+            },
+            huggingface: {
+                name: 'Hugging Face',
+                icon: '🤗',
+                category: 'Cloud GPU',
+                endpoint: 'https://api-inference.huggingface.co/models/{model}',
+                authType: 'bearer',
+                keyPrefix: 'hf_',
+                keyPlaceholder: 'hf_...',
+                models: ['meta-llama/Llama-3.3-70B-Instruct', 'mistralai/Mixtral-8x7B-Instruct-v0.1', 'microsoft/Phi-3-medium-128k-instruct'],
+                defaultModel: 'meta-llama/Llama-3.3-70B-Instruct',
+                docs: 'https://huggingface.co/settings/tokens'
+            },
+            hyperbolic: {
+                name: 'Hyperbolic',
+                icon: '🌀',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.hyperbolic.xyz/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['meta-llama/Meta-Llama-3.1-405B-Instruct', 'meta-llama/Meta-Llama-3.1-70B-Instruct', 'Qwen/Qwen2.5-72B-Instruct'],
+                defaultModel: 'meta-llama/Meta-Llama-3.1-70B-Instruct',
+                docs: 'https://app.hyperbolic.xyz/'
+            },
+            novita: {
+                name: 'Novita AI',
+                icon: '✨',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.novita.ai/v3/openai/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['deepseek/deepseek-v3', 'meta-llama/llama-3.3-70b-instruct', 'qwen/qwen-2.5-72b-instruct'],
+                defaultModel: 'deepseek/deepseek-v3',
+                docs: 'https://novita.ai/'
+            },
+            deepinfra: {
+                name: 'DeepInfra',
+                icon: '🔬',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.deepinfra.com/v1/openai/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['meta-llama/Llama-3.3-70B-Instruct', 'mistralai/Mixtral-8x22B-Instruct-v0.1', 'Qwen/Qwen2.5-72B-Instruct'],
+                defaultModel: 'meta-llama/Llama-3.3-70B-Instruct',
+                docs: 'https://deepinfra.com/'
+            },
+            fal: {
+                name: 'Fal AI',
+                icon: '🎯',
+                category: 'Cloud GPU',
+                endpoint: 'https://fal.run/{model}',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['fal-ai/llama-3.3-70b-instruct', 'fal-ai/flux/dev', 'fal-ai/fast-svd'],
+                defaultModel: 'fal-ai/llama-3.3-70b-instruct',
+                docs: 'https://fal.ai/'
+            },
+            runpod: {
+                name: 'RunPod',
+                icon: '🏃',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.runpod.ai/v2/{endpoint_id}/runsync',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['custom-endpoint'],
+                defaultModel: 'custom-endpoint',
+                requiresEndpoint: true,
+                docs: 'https://www.runpod.io/'
+            },
+            lambda: {
+                name: 'Lambda Labs',
+                icon: 'λ',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.lambdalabs.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama3.1-405b', 'llama3.1-70b', 'llama3.1-8b'],
+                defaultModel: 'llama3.1-70b',
+                docs: 'https://cloud.lambdalabs.com/'
+            },
+            vastai: {
+                name: 'Vast.ai',
+                icon: '🌌',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.vast.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama-3.3-70b', 'mixtral-8x7b', 'qwen-2.5-72b'],
+                defaultModel: 'llama-3.3-70b',
+                docs: 'https://vast.ai/'
+            },
+            modal: {
+                name: 'Modal',
+                icon: '📦',
+                category: 'Cloud GPU',
+                endpoint: 'https://api.modal.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['custom-model'],
+                defaultModel: 'custom-model',
+                requiresEndpoint: true,
+                docs: 'https://modal.com/'
+            },
+            lepton: {
+                name: 'Lepton AI',
+                icon: '⚡',
+                category: 'Cloud GPU',
+                endpoint: 'https://{model}.lepton.run/api/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama3.3-70b', 'llama3.1-8b', 'mistral-7b'],
+                defaultModel: 'llama3.3-70b',
+                docs: 'https://www.lepton.ai/'
+            },
+
+            // ===== CLOUD PROVIDERS =====
+            azure: {
+                name: 'Azure OpenAI',
+                icon: '☁️',
+                category: 'Cloud Providers',
+                endpoint: 'https://{resource}.openai.azure.com/openai/deployments/{deployment}/chat/completions?api-version=2024-02-15-preview',
+                authType: 'api-key',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['gpt-4o', 'gpt-4-turbo', 'gpt-35-turbo', 'gpt-4'],
+                defaultModel: 'gpt-4o',
+                requiresResource: true,
+                docs: 'https://portal.azure.com/'
+            },
+            aws: {
+                name: 'AWS Bedrock',
+                icon: '🟠',
+                category: 'Cloud Providers',
+                endpoint: 'https://bedrock-runtime.{region}.amazonaws.com/model/{model}/invoke',
+                authType: 'aws',
+                keyPrefix: '',
+                keyPlaceholder: 'Access Key ID',
+                models: ['anthropic.claude-3-5-sonnet', 'anthropic.claude-3-opus', 'meta.llama3-70b-instruct'],
+                defaultModel: 'anthropic.claude-3-5-sonnet',
+                requiresSecret: true,
+                docs: 'https://aws.amazon.com/bedrock/'
+            },
+            vertex: {
+                name: 'Google Vertex AI',
+                icon: '🔷',
+                category: 'Cloud Providers',
+                endpoint: 'https://{region}-aiplatform.googleapis.com/v1/projects/{project}/locations/{region}/publishers/{publisher}/models/{model}:predict',
+                authType: 'oauth',
+                keyPrefix: '',
+                keyPlaceholder: 'OAuth Token',
+                models: ['gemini-1.5-pro', 'gemini-1.5-flash', 'claude-3-sonnet', 'llama-3.1-70b'],
+                defaultModel: 'gemini-1.5-pro',
+                docs: 'https://cloud.google.com/vertex-ai'
+            },
+            cloudflare: {
+                name: 'Cloudflare Workers AI',
+                icon: '🟠',
+                category: 'Cloud Providers',
+                endpoint: 'https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Token',
+                models: ['@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/meta/llama-3.1-8b-instruct', '@cf/mistral/mistral-7b-instruct'],
+                defaultModel: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+                docs: 'https://dash.cloudflare.com/'
+            },
+            databricks: {
+                name: 'Databricks',
+                icon: '🧱',
+                category: 'Cloud Providers',
+                endpoint: 'https://{workspace}.databricks.com/serving-endpoints/{model}/invocations',
+                authType: 'bearer',
+                keyPrefix: 'dapi',
+                keyPlaceholder: 'dapi...',
+                models: ['databricks-dbrx-instruct', 'databricks-mixtral-8x7b-instruct', 'databricks-llama-3-70b'],
+                defaultModel: 'databricks-dbrx-instruct',
+                docs: 'https://databricks.com/'
+            },
+            ibm: {
+                name: 'IBM Watson',
+                icon: '🔵',
+                category: 'Cloud Providers',
+                endpoint: 'https://us-south.ml.cloud.ibm.com/ml/v1/text/generation',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'IAM Token',
+                models: ['ibm/granite-13b-chat-v2', 'ibm/granite-20b-code-instruct', 'meta-llama/llama-3-70b-instruct'],
+                defaultModel: 'ibm/granite-13b-chat-v2',
+                docs: 'https://cloud.ibm.com/'
+            },
+            nvidia: {
+                name: 'NVIDIA NIM',
+                icon: '💚',
+                category: 'Cloud Providers',
+                endpoint: 'https://integrate.api.nvidia.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'nvapi-',
+                keyPlaceholder: 'nvapi-...',
+                models: ['meta/llama-3.3-70b-instruct', 'meta/llama-3.1-405b-instruct', 'mistralai/mixtral-8x22b-instruct-v0.1'],
+                defaultModel: 'meta/llama-3.3-70b-instruct',
+                docs: 'https://build.nvidia.com/'
+            },
+            oracle: {
+                name: 'Oracle Cloud AI',
+                icon: '🔴',
+                category: 'Cloud Providers',
+                endpoint: 'https://generativeai.{region}.oci.oraclecloud.com/20231130/actions/chat',
+                authType: 'oci',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key',
+                models: ['cohere.command-r-plus', 'cohere.command-r', 'meta.llama-3-70b-instruct'],
+                defaultModel: 'cohere.command-r-plus',
+                docs: 'https://cloud.oracle.com/'
+            },
+            scaleway: {
+                name: 'Scaleway',
+                icon: '🟣',
+                category: 'Cloud Providers',
+                endpoint: 'https://api.scaleway.com/llm/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key',
+                models: ['llama-3.3-70b-instruct', 'llama-3.1-8b-instruct', 'mistral-nemo'],
+                defaultModel: 'llama-3.3-70b-instruct',
+                docs: 'https://www.scaleway.com/'
+            },
+
+            // ===== SPECIALIZED PROVIDERS =====
+            stability: {
+                name: 'Stability AI',
+                icon: '🎨',
+                category: 'Specialized',
+                endpoint: 'https://api.stability.ai/v1/generate/{model}',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['stable-diffusion-xl-1024-v1-0', 'stable-image-ultra', 'stable-diffusion-3-large'],
+                defaultModel: 'stable-diffusion-3-large',
+                docs: 'https://platform.stability.ai/'
+            },
+            elevenlabs: {
+                name: 'ElevenLabs',
+                icon: '🔊',
+                category: 'Specialized',
+                endpoint: 'https://api.elevenlabs.io/v1/text-to-speech/{model}',
+                authType: 'xi-api-key',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['eleven_multilingual_v2', 'eleven_monolingual_v1', 'eleven_turbo_v2'],
+                defaultModel: 'eleven_multilingual_v2',
+                docs: 'https://elevenlabs.io/'
+            },
+            assemblyai: {
+                name: 'AssemblyAI',
+                icon: '🎙️',
+                category: 'Specialized',
+                endpoint: 'https://api.assemblyai.com/v2/transcript',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['best', 'nano'],
+                defaultModel: 'best',
+                docs: 'https://www.assemblyai.com/'
+            },
+            voyage: {
+                name: 'Voyage AI',
+                icon: '🧭',
+                category: 'Specialized',
+                endpoint: 'https://api.voyageai.com/v1/embeddings',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['voyage-3', 'voyage-3-lite', 'voyage-2', 'voyage-large-2-instruct'],
+                defaultModel: 'voyage-3',
+                docs: 'https://www.voyageai.com/'
+            },
+            jina: {
+                name: 'Jina AI',
+                icon: '🔗',
+                category: 'Specialized',
+                endpoint: 'https://api.jina.ai/v1/embeddings',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['jina-embeddings-v3', 'jina-embeddings-v2-base-en', 'jina-colbert-v2'],
+                defaultModel: 'jina-embeddings-v3',
+                docs: 'https://jina.ai/'
+            },
+            nomic: {
+                name: 'Nomic AI',
+                icon: '🌐',
+                category: 'Specialized',
+                endpoint: 'https://api-atlas.nomic.ai/v1/embedding/text',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['nomic-embed-text-v1', 'nomic-embed-text-v1.5'],
+                defaultModel: 'nomic-embed-text-v1.5',
+                docs: 'https://home.nomic.ai/'
+            },
+            pinecone: {
+                name: 'Pinecone',
+                icon: '🌲',
+                category: 'Specialized',
+                endpoint: 'https://{index}-{project}.svc.pinecone.io/vectors/upsert',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['text-embedding-ada-002'],
+                defaultModel: 'text-embedding-ada-002',
+                docs: 'https://www.pinecone.io/'
+            },
+            cohere_embed: {
+                name: 'Cohere Embed',
+                icon: '📊',
+                category: 'Specialized',
+                endpoint: 'https://api.cohere.ai/v1/embed',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['embed-english-v3.0', 'embed-multilingual-v3.0'],
+                defaultModel: 'embed-english-v3.0',
+                docs: 'https://cohere.com/'
+            },
+
+            // ===== LOCAL / OPEN SOURCE =====
+            ollama: {
+                name: 'Ollama (Local)',
+                icon: '🦙',
+                category: 'Local / Open',
+                endpoint: 'http://localhost:11434/api/chat',
+                authType: 'none',
+                keyPrefix: '',
+                keyPlaceholder: 'No key required',
+                models: ['llama3.3', 'llama3.2', 'mistral', 'qwen2.5', 'deepseek-r1', 'phi3'],
+                defaultModel: 'llama3.3',
+                isLocal: true,
+                docs: 'https://ollama.ai/'
+            },
+            llama_cpp: {
+                name: 'llama.cpp Server',
+                icon: '🖥️',
+                category: 'Local / Open',
+                endpoint: 'http://localhost:8080/v1/chat/completions',
+                authType: 'none',
+                keyPrefix: '',
+                keyPlaceholder: 'No key required',
+                models: ['local-model'],
+                defaultModel: 'local-model',
+                isLocal: true,
+                docs: 'https://github.com/ggerganov/llama.cpp'
+            },
+            vllm: {
+                name: 'vLLM',
+                icon: '🚀',
+                category: 'Local / Open',
+                endpoint: 'http://localhost:8000/v1/chat/completions',
+                authType: 'none',
+                keyPrefix: '',
+                keyPlaceholder: 'No key required',
+                models: ['local-model'],
+                defaultModel: 'local-model',
+                isLocal: true,
+                docs: 'https://vllm.ai/'
+            },
+            localai: {
+                name: 'LocalAI',
+                icon: '🏠',
+                category: 'Local / Open',
+                endpoint: 'http://localhost:8080/v1/chat/completions',
+                authType: 'none',
+                keyPrefix: '',
+                keyPlaceholder: 'No key required',
+                models: ['local-model'],
+                defaultModel: 'local-model',
+                isLocal: true,
+                docs: 'https://localai.io/'
+            },
+            textgen: {
+                name: 'Text Generation WebUI',
+                icon: '💬',
+                category: 'Local / Open',
+                endpoint: 'http://localhost:5000/v1/chat/completions',
+                authType: 'none',
+                keyPrefix: '',
+                keyPlaceholder: 'No key required',
+                models: ['local-model'],
+                defaultModel: 'local-model',
+                isLocal: true,
+                docs: 'https://github.com/oobabooga/text-generation-webui'
+            },
+
+            // ===== EUROPEAN PROVIDERS =====
+            mistral_eu: {
+                name: 'Mistral (EU)',
+                icon: '🇪🇺',
+                category: 'European',
+                endpoint: 'https://api.mistral.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['mistral-large-latest', 'mistral-medium-latest', 'mistral-small-latest'],
+                defaultModel: 'mistral-large-latest',
+                docs: 'https://mistral.ai/'
+            },
+            deepseek_eu: {
+                name: 'DeepSeek (EU)',
+                icon: '🇪🇺',
+                category: 'European',
+                endpoint: 'https://api.deepseek.eu/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-',
+                keyPlaceholder: 'sk-...',
+                models: ['deepseek-chat', 'deepseek-coder'],
+                defaultModel: 'deepseek-chat',
+                docs: 'https://deepseek.com/'
+            },
+            aleph: {
+                name: 'Aleph Alpha',
+                icon: '🇩🇪',
+                category: 'European',
+                endpoint: 'https://api.aleph-alpha.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['luminous-supreme-control', 'luminous-extended-control'],
+                defaultModel: 'luminous-supreme-control',
+                docs: 'https://aleph-alpha.com/'
+            },
+
+            // ===== ENTERPRISE / API GATEWAYS =====
+            anyscale: {
+                name: 'Anyscale',
+                icon: '📊',
+                category: 'Enterprise',
+                endpoint: 'https://api.endpoints.anyscale.com/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['meta-llama/Llama-3.3-70B-Instruct', 'mistralai/Mixtral-8x7B-Instruct-v0.1'],
+                defaultModel: 'meta-llama/Llama-3.3-70B-Instruct',
+                docs: 'https://www.anyscale.com/'
+            },
+            predibase: {
+                name: 'Predibase',
+                icon: '🎯',
+                category: 'Enterprise',
+                endpoint: 'https://serving.app.predibase.com/{model}/deployments/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['custom-model'],
+                defaultModel: 'custom-model',
+                docs: 'https://predibase.com/'
+            },
+            octoai: {
+                name: 'OctoAI',
+                icon: '🐙',
+                category: 'Enterprise',
+                endpoint: 'https://text.octoai.run/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['meta-llama-3.1-70b-instruct', 'meta-llama-3.1-8b-instruct', 'mistral-7b-instruct'],
+                defaultModel: 'meta-llama-3.1-70b-instruct',
+                docs: 'https://octo.ai/'
+            },
+            sambanova: {
+                name: 'SambaNova',
+                icon: '🔄',
+                category: 'Enterprise',
+                endpoint: 'https://api.sambanova.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['Meta-Llama-3.1-405B-Instruct', 'Meta-Llama-3.1-70B-Instruct', 'Meta-Llama-3.1-8B-Instruct'],
+                defaultModel: 'Meta-Llama-3.1-70B-Instruct',
+                docs: 'https://sambanova.ai/'
+            },
+            cerebras: {
+                name: 'Cerebras',
+                icon: '🧠',
+                category: 'Enterprise',
+                endpoint: 'https://api.cerebras.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama3.1-8b', 'llama3.1-70b'],
+                defaultModel: 'llama3.1-70b',
+                docs: 'https://cerebras.ai/'
+            },
+            grok: {
+                name: 'Grok (xAI)',
+                icon: '𝕏',
+                category: 'Enterprise',
+                endpoint: 'https://api.x.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'xai-',
+                keyPlaceholder: 'xai-...',
+                models: ['grok-beta', 'grok-2-1212'],
+                defaultModel: 'grok-beta',
+                docs: 'https://x.ai/'
+            },
+
+            // ===== KOREAN PROVIDERS =====
+            clova: {
+                name: 'Naver Clova',
+                icon: '🇰🇷',
+                category: 'Asian',
+                endpoint: 'https://clovastudio.apigw.ntruss.com/v1/chat-completions/HCX-003',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['HCX-003', 'HCX-DASH-001'],
+                defaultModel: 'HCX-003',
+                docs: 'https://www.ncloud.com/'
+            },
+            upstage: {
+                name: 'Upstage',
+                icon: '☀️',
+                category: 'Asian',
+                endpoint: 'https://api.upstage.ai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['solar-1-mini-chat', 'solar-pro', 'solar-mini'],
+                defaultModel: 'solar-pro',
+                docs: 'https://upstage.ai/'
+            },
+
+            // ===== API AGGREGATORS =====
+            openrouter: {
+                name: 'OpenRouter',
+                icon: '🔀',
+                category: 'Aggregators',
+                endpoint: 'https://openrouter.ai/api/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: 'sk-or-',
+                keyPlaceholder: 'sk-or-...',
+                models: ['openai/gpt-4o', 'anthropic/claude-3.5-sonnet', 'google/gemini-pro-1.5', 'meta-llama/llama-3.3-70b-instruct'],
+                defaultModel: 'openai/gpt-4o',
+                docs: 'https://openrouter.ai/'
+            },
+            glhf: {
+                name: 'GLHF',
+                icon: '🎮',
+                category: 'Aggregators',
+                endpoint: 'https://glhf.chat/api/openai/v1/chat/completions',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key...',
+                models: ['llama-3.3-70b', 'llama-3.1-8b', 'mistral-7b'],
+                defaultModel: 'llama-3.3-70b',
+                docs: 'https://glhf.chat/'
+            },
+
+            // ===== CUSTOM =====
+            custom: {
+                name: 'Custom Endpoint',
+                icon: '⚙️',
+                category: 'Custom',
+                endpoint: '',
+                authType: 'bearer',
+                keyPrefix: '',
+                keyPlaceholder: 'API Key (optional)',
+                models: ['custom-model'],
+                defaultModel: 'custom-model',
+                requiresEndpoint: true,
+                docs: ''
+            }
+        };
+
+        // Get providers by category
+        function getProvidersByCategory() {
+            const categories = {};
+            for (const [id, provider] of Object.entries(AI_PROVIDERS)) {
+                if (!categories[provider.category]) {
+                    categories[provider.category] = [];
+                }
+                categories[provider.category].push({ id, ...provider });
+            }
+            return categories;
+        }
+
+        // ==========================================
+        // DATA MANAGEMENT
+        // ==========================================
+        
+        const STORAGE_KEY = 'teamAIHubDataV2';
+        
+        let appData = {
+            teamMembers: [],
+            tasks: [],
+            settings: {
+                darkMode: true,
+                defaultProvider: 'openai',
+                globalApiKeys: {}
+            },
+            activity: [],
+            activeMemberId: null
+        };
+
+        // Initialize global API keys for all providers
+        function initializeGlobalApiKeys() {
+            for (const providerId of Object.keys(AI_PROVIDERS)) {
+                if (!appData.settings.globalApiKeys[providerId]) {
+                    appData.settings.globalApiKeys[providerId] = '';
+                }
+            }
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                appData = JSON.parse(stored);
+            }
+            initializeGlobalApiKeys();
+            renderAll();
+            renderProviderGrids();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        }
+
+        // ==========================================
+        // AI PROVIDER WRAPPER
+        // ==========================================
+        
+        class AIProviderWrapper {
+            constructor(config) {
+                this.providerId = config.provider;
+                this.provider = AI_PROVIDERS[config.provider];
+                this.model = config.model || this.provider?.defaultModel;
+                this.apiKey = config.apiKey;
+                this.customEndpoint = config.customEndpoint;
+                this.systemPrompt = config.systemPrompt || 'You are a helpful AI assistant.';
+                this.temperature = config.temperature || 0.7;
+                this.maxTokens = config.maxTokens || 4096;
+            }
+
+            getEndpoint() {
+                if (this.customEndpoint) return this.customEndpoint;
+                if (!this.provider) return '';
+                
+                let endpoint = this.provider.endpoint;
+                
+                // Replace placeholders
+                if (endpoint.includes('{model}')) {
+                    endpoint = endpoint.replace('{model}', this.model);
+                }
+                
+                // Handle query auth type (like Google)
+                if (this.provider.authType === 'query') {
+                    const sep = endpoint.includes('?') ? '&' : '?';
+                    endpoint = `${endpoint}${sep}key=${this.apiKey}`;
+                }
+                
+                return endpoint;
+            }
+
+            getHeaders() {
+                if (!this.provider) return {};
+                
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                const authType = this.provider.authType;
+                
+                if (authType === 'none' || authType === 'query') {
+                    // No auth header needed
+                } else if (authType === 'bearer') {
+                    headers['Authorization'] = `Bearer ${this.apiKey}`;
+                } else if (authType === 'x-api-key') {
+                    headers['x-api-key'] = this.apiKey;
+                } else if (authType === 'xi-api-key') {
+                    headers['xi-api-key'] = this.apiKey;
+                } else if (authType === 'api-key') {
+                    headers['api-key'] = this.apiKey;
+                } else {
+                    headers['Authorization'] = `Bearer ${this.apiKey}`;
+                }
+                
+                // Add provider-specific headers
+                if (this.provider.headers) {
+                    Object.assign(headers, this.provider.headers);
+                }
+                
+                return headers;
+            }
+
+            formatRequest(messages) {
+                const provider = this.provider;
+                
+                // Google Gemini format
+                if (this.providerId === 'google') {
+                    return {
+                        contents: messages.map(m => ({
+                            role: m.role === 'user' ? 'user' : 'model',
+                            parts: [{ text: m.content }]
+                        })),
+                        generationConfig: {
+                            temperature: this.temperature,
+                            maxOutputTokens: this.maxTokens
+                        },
+                        systemInstruction: {
+                            parts: [{ text: this.systemPrompt }]
+                        }
+                    };
+                }
+                
+                // Anthropic format
+                if (this.providerId === 'anthropic') {
+                    return {
+                        model: this.model,
+                        system: this.systemPrompt,
+                        messages: messages.map(m => ({
+                            role: m.role,
+                            content: m.content
+                        })),
+                        max_tokens: this.maxTokens
+                    };
+                }
+                
+                // Cohere format
+                if (this.providerId === 'cohere') {
+                    return {
+                        model: this.model,
+                        messages: messages.map(m => ({
+                            role: m.role,
+                            content: m.content
+                        })),
+                        max_tokens: this.maxTokens,
+                        temperature: this.temperature
+                    };
+                }
+                
+                // Default OpenAI-compatible format
+                return {
+                    model: this.model,
+                    messages: [
+                        { role: 'system', content: this.systemPrompt },
+                        ...messages
+                    ],
+                    temperature: this.temperature,
+                    max_tokens: this.maxTokens
+                };
+            }
+
+            parseResponse(data) {
+                // Google Gemini
+                if (this.providerId === 'google') {
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
+                }
+                
+                // Anthropic
+                if (this.providerId === 'anthropic') {
+                    return data.content?.[0]?.text || 'No response';
+                }
+                
+                // Cohere
+                if (this.providerId === 'cohere') {
+                    return data.message?.content?.[0]?.text || data.text || 'No response';
+                }
+                
+                // Default OpenAI-compatible
+                return data.choices?.[0]?.message?.content || 'No response';
+            }
+
+            async chat(messages) {
+                try {
+                    const endpoint = this.getEndpoint();
+                    const headers = this.getHeaders();
+                    const body = this.formatRequest(messages);
+
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify(body)
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json().catch(() => ({}));
+                        throw new Error(error.error?.message || error.message || `API Error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return this.parseResponse(data);
+                } catch (error) {
+                    console.error('AI API Error:', error);
+                    throw error;
+                }
+            }
+        }
+
+        // ==========================================
+        // RENDER PROVIDER GRIDS
+        // ==========================================
+        
+        let selectedProviderId = 'openai';
+        let selectedAgentProviderId = null;
+
+        function renderProviderGrids() {
+            renderProviderGrid('providerGrid', 'addMember');
+            renderProviderGrid('agentProviderGrid', 'agentConfig');
+            renderGlobalApiKeysSettings();
+        }
+
+        function renderProviderGrid(containerId, context) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            const categories = getProvidersByCategory();
+            const selectedId = context === 'addMember' ? selectedProviderId : selectedAgentProviderId;
+            
+            let html = '';
+            
+            for (const [category, providers] of Object.entries(categories)) {
+                html += `<div class="provider-category-header">${category}</div>`;
+                
+                for (const provider of providers) {
+                    const isSelected = selectedId === provider.id;
+                    const hasGlobalKey = appData.settings.globalApiKeys[provider.id]?.length > 0;
+                    
+                    html += `
+                        <div class="provider-option ${isSelected ? 'selected' : ''}" 
+                             data-provider="${provider.id}"
+                             onclick="selectProvider('${provider.id}', '${context}')">
+                            <div class="provider-option-icon">${provider.icon}</div>
+                            <div class="provider-option-name">${provider.name}</div>
+                            <div class="provider-category">${hasGlobalKey ? '✓ Key Set' : ''}</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function selectProvider(providerId, context) {
+            if (context === 'addMember') {
+                selectedProviderId = providerId;
+                renderProviderGrid('providerGrid', 'addMember');
+            } else {
+                selectedAgentProviderId = providerId;
+                renderProviderGrid('agentProviderGrid', 'agentConfig');
+            }
+            
+            updateProviderConfig(providerId, context);
+        }
+
+        function updateProviderConfig(providerId, context) {
+            const provider = AI_PROVIDERS[providerId];
+            if (!provider) return;
+            
+            const configSection = context === 'addMember' 
+                ? document.getElementById('selectedProviderConfig')
+                : document.getElementById('agentProviderConfig');
+            
+            if (!configSection) return;
+            
+            // Show config section
+            if (context === 'addMember') {
+                configSection.style.display = 'block';
+            }
+            
+            // Update model selector
+            const modelSelect = context === 'addMember' 
+                ? document.getElementById('newMemberModel')
+                : document.getElementById('agentModel');
+            
+            if (modelSelect) {
+                modelSelect.innerHTML = provider.models.map(m => 
+                    `<option value="${m}" ${m === provider.defaultModel ? 'selected' : ''}>${m}</option>`
+                ).join('');
+            }
+            
+            // Show/hide custom endpoint section
+            const customSection = context === 'addMember'
+                ? document.getElementById('customEndpointSection')
+                : document.getElementById('agentCustomEndpointSection');
+            
+            if (customSection) {
+                customSection.style.display = provider.requiresEndpoint ? 'block' : 'none';
+            }
+            
+            // Update API key placeholder
+            const apiKeyInput = context === 'addMember'
+                ? document.getElementById('newMemberApiKey')
+                : document.getElementById('agentApiKey');
+            
+            if (apiKeyInput) {
+                apiKeyInput.placeholder = provider.keyPlaceholder;
+                if (provider.isLocal || provider.authType === 'none') {
+                    apiKeyInput.disabled = true;
+                    apiKeyInput.value = '';
+                    apiKeyInput.placeholder = 'No key required (local)';
+                } else {
+                    apiKeyInput.disabled = false;
+                }
+            }
+            
+            // Update API key status
+            const statusEl = document.getElementById('apiKeyStatus');
+            if (statusEl && context === 'addMember') {
+                const hasGlobal = appData.settings.globalApiKeys[providerId]?.length > 0;
+                if (provider.isLocal || provider.authType === 'none') {
+                    statusEl.className = 'api-key-status configured';
+                    statusEl.textContent = '✓ No key required for local models';
+                } else if (hasGlobal) {
+                    statusEl.className = 'api-key-status global';
+                    statusEl.textContent = '✓ Global key available';
+                } else {
+                    statusEl.className = 'api-key-status missing';
+                    statusEl.textContent = '⚠ No global key set';
+                }
+            }
+            
+            // Show provider info
+            const infoEl = document.getElementById('providerInfo');
+            if (infoEl && context === 'addMember') {
+                infoEl.innerHTML = `
+                    <div class="provider-info-row">
+                        <span class="provider-info-label">Provider:</span>
+                        <span>${provider.name}</span>
+                    </div>
+                    <div class="provider-info-row">
+                        <span class="provider-info-label">Auth Type:</span>
+                        <span>${provider.authType}</span>
+                    </div>
+                    ${provider.docs ? `
+                    <div class="provider-info-row">
+                        <span class="provider-info-label">Get API Key:</span>
+                        <a href="${provider.docs}" target="_blank" style="color: var(--primary-light);">Documentation ↗</a>
+                    </div>
+                    ` : ''}
+                `;
+            }
+        }
+
+        function filterProviders() {
+            const searchInput = document.getElementById('providerSearchInput');
+            const query = searchInput.value.toLowerCase();
+            const options = document.querySelectorAll('#providerGrid .provider-option');
+            const categoryHeaders = document.querySelectorAll('#providerGrid .provider-category-header');
+            
+            options.forEach(option => {
+                const name = option.querySelector('.provider-option-name').textContent.toLowerCase();
+                const provider = AI_PROVIDERS[option.dataset.provider];
+                const matchesSearch = name.includes(query) || provider.category.toLowerCase().includes(query);
+                option.style.display = matchesSearch ? 'block' : 'none';
+            });
+            
+            // Show/hide category headers based on visible items
+            categoryHeaders.forEach(header => {
+                let hasVisible = false;
+                let nextEl = header.nextElementSibling;
+                while (nextEl && !nextEl.classList.contains('provider-category-header')) {
+                    if (nextEl.style.display !== 'none') {
+                        hasVisible = true;
+                        break;
+                    }
+                    nextEl = nextEl.nextElementSibling;
+                }
+                header.style.display = hasVisible ? 'block' : 'none';
+            });
+        }
+
+        function filterAgentProviders() {
+            const searchInput = document.getElementById('agentProviderSearch');
+            const query = searchInput.value.toLowerCase();
+            const options = document.querySelectorAll('#agentProviderGrid .provider-option');
+            const categoryHeaders = document.querySelectorAll('#agentProviderGrid .provider-category-header');
+            
+            options.forEach(option => {
+                const name = option.querySelector('.provider-option-name').textContent.toLowerCase();
+                const provider = AI_PROVIDERS[option.dataset.provider];
+                const matchesSearch = name.includes(query) || provider.category.toLowerCase().includes(query);
+                option.style.display = matchesSearch ? 'block' : 'none';
+            });
+            
+            categoryHeaders.forEach(header => {
+                let hasVisible = false;
+                let nextEl = header.nextElementSibling;
+                while (nextEl && !nextEl.classList.contains('provider-category-header')) {
+                    if (nextEl.style.display !== 'none') {
+                        hasVisible = true;
+                        break;
+                    }
+                    nextEl = nextEl.nextElementSibling;
+                }
+                header.style.display = hasVisible ? 'block' : 'none';
+            });
+        }
+
+        // ==========================================
+        // TEAM MANAGEMENT
+        // ==========================================
+        
+        function addMember() {
+            const name = document.getElementById('newMemberName').value.trim();
+            const role = document.getElementById('newMemberRole').value.trim();
+            const systemPrompt = document.getElementById('newMemberSystemPrompt').value.trim();
+            const apiKey = document.getElementById('newMemberApiKey').value.trim();
+            const model = document.getElementById('newMemberModel').value;
+            const customEndpoint = document.getElementById('newMemberCustomEndpoint')?.value.trim() || '';
+
+            if (!name) {
+                alert('Please enter a member name');
+                return;
+            }
+
+            const provider = AI_PROVIDERS[selectedProviderId];
+            
+            const member = {
+                id: Date.now().toString(),
+                name,
+                role: role || 'Team Member',
+                avatar: getAvatarColor(name),
+                agent: {
+                    name: `${name}'s Assistant`,
+                    provider: selectedProviderId,
+                    model,
+                    apiKey,
+                    customEndpoint,
+                    systemPrompt: systemPrompt || `You are ${name}'s personal AI assistant. Help them with their work as a ${role || 'team member'}. Be helpful, professional, and efficient.`,
+                    temperature: 0.7,
+                    maxTokens: 4096
+                },
+                messages: [],
+                createdAt: new Date().toISOString()
+            };
+
+            appData.teamMembers.push(member);
+            addActivity(`Added new team member: ${name} (${provider.name})`);
+            saveData();
+            renderMembers();
+            closeModal('addMemberModal');
+            
+            // Clear form
+            document.getElementById('newMemberName').value = '';
+            document.getElementById('newMemberRole').value = '';
+            document.getElementById('newMemberApiKey').value = '';
+            document.getElementById('newMemberSystemPrompt').value = '';
+            document.getElementById('selectedProviderConfig').style.display = 'none';
+
+            selectMember(member.id);
+        }
+
+        function deleteMember(id) {
+            if (!confirm('Are you sure you want to remove this team member?')) return;
+            
+            const member = appData.teamMembers.find(m => m.id === id);
+            appData.teamMembers = appData.teamMembers.filter(m => m.id !== id);
+            
+            if (appData.activeMemberId === id) {
+                appData.activeMemberId = null;
+            }
+            
+            addActivity(`Removed team member: ${member?.name}`);
+            saveData();
+            renderAll();
+        }
+
+        function selectMember(id) {
+            appData.activeMemberId = id;
+            saveData();
+            renderMembers();
+            renderChat();
+        }
+
+        function getAvatarColor(name) {
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)'
+            ];
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % colors.length;
+            return colors[index];
+        }
+
+        function renderMembers() {
+            const list = document.getElementById('memberList');
+            document.getElementById('memberCount').textContent = appData.teamMembers.length;
+            
+            // Update task assignee dropdown
+            const assigneeSelect = document.getElementById('taskAssignee');
+            assigneeSelect.innerHTML = '<option value="">Unassigned</option>' +
+                appData.teamMembers.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
+            
+            if (appData.teamMembers.length === 0) {
+                list.innerHTML = `
+                    <button class="add-member-btn" onclick="openModal('addMemberModal')">
+                        + Add Team Member
+                    </button>
+                `;
+                return;
+            }
+
+            list.innerHTML = appData.teamMembers.map(member => {
+                const provider = AI_PROVIDERS[member.agent.provider];
+                return `
+                    <div class="member-card ${appData.activeMemberId === member.id ? 'active' : ''}" onclick="selectMember('${member.id}')">
+                        <div class="member-header">
+                            <div class="member-avatar" style="background: ${member.avatar}">
+                                ${member.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+                            </div>
+                            <div class="member-info">
+                                <div class="member-name">${member.name}</div>
+                                <div class="member-role">${member.role}</div>
+                            </div>
+                            <button class="btn btn-small btn-secondary" onclick="event.stopPropagation(); deleteMember('${member.id}')" title="Remove member">✕</button>
+                        </div>
+                        <div class="member-agent">
+                            <div class="agent-status"></div>
+                            <span>${member.agent.name}</span>
+                            <span class="agent-badge">${provider?.icon || '⚙️'} ${provider?.name || 'Custom'}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('') + `
+                <button class="add-member-btn" onclick="openModal('addMemberModal')">
+                    + Add Another Member
+                </button>
+            `;
+        }
+
+        // ==========================================
+        // CHAT FUNCTIONALITY
+        // ==========================================
+        
+        function renderChat() {
+            const member = appData.teamMembers.find(m => m.id === appData.activeMemberId);
+            
+            if (!member) {
+                document.getElementById('emptyState').style.display = 'flex';
+                document.getElementById('chatHeader').style.display = 'none';
+                document.getElementById('chatMessages').style.display = 'none';
+                document.getElementById('chatInputContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('chatHeader').style.display = 'flex';
+            document.getElementById('chatMessages').style.display = 'flex';
+            document.getElementById('chatInputContainer').style.display = 'block';
+
+            const provider = AI_PROVIDERS[member.agent.provider];
+            
+            document.getElementById('activeMemberAvatar').style.background = member.avatar;
+            document.getElementById('activeMemberAvatar').textContent = member.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById('activeMemberName').textContent = member.name;
+            document.getElementById('activeAgentInfo').textContent = `${provider?.icon || '⚙️'} ${provider?.name || 'Custom'} - ${member.agent.model}`;
+
+            const messages = document.getElementById('chatMessages');
+            
+            if (!member.messages || member.messages.length === 0) {
+                messages.innerHTML = `
+                    <div class="message agent">
+                        <div class="message-header">🤖 ${member.agent.name}</div>
+                        <div class="message-content">Hello! I'm ${member.agent.name}, powered by ${provider?.name || 'an AI model'}. How can I help you today?</div>
+                    </div>
+                `;
+            } else {
+                messages.innerHTML = member.messages.map(msg => `
+                    <div class="message ${msg.role}">
+                        <div class="message-header">${msg.role === 'user' ? '👤 You' : '🤖 ' + member.agent.name}</div>
+                        <div class="message-content">${escapeHtml(msg.content)}</div>
+                    </div>
+                `).join('');
+            }
+            
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message || !appData.activeMemberId) return;
+
+            const member = appData.teamMembers.find(m => m.id === appData.activeMemberId);
+            if (!member) return;
+
+            // Add user message
+            member.messages.push({ role: 'user', content: message });
+            input.value = '';
+            renderChat();
+
+            // Show typing indicator
+            const messages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message agent';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            messages.appendChild(typingDiv);
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                // Get API key (member specific or global)
+                let apiKey = member.agent.apiKey;
+                if (!apiKey && member.agent.provider !== 'custom') {
+                    apiKey = appData.settings.globalApiKeys[member.agent.provider] || '';
+                }
+
+                const provider = AI_PROVIDERS[member.agent.provider];
+                if (!provider.isLocal && provider.authType !== 'none' && !apiKey) {
+                    throw new Error(`No API key configured for ${provider.name}. Please add an API key in member settings or global settings.`);
+                }
+
+                const wrapper = new AIProviderWrapper({
+                    provider: member.agent.provider,
+                    model: member.agent.model,
+                    apiKey,
+                    customEndpoint: member.agent.customEndpoint,
+                    systemPrompt: member.agent.systemPrompt,
+                    temperature: member.agent.temperature,
+                    maxTokens: member.agent.maxTokens
+                });
+
+                const response = await wrapper.chat(member.messages);
+                
+                // Remove typing indicator
+                document.getElementById('typingIndicator')?.remove();
+                
+                // Add AI response
+                member.messages.push({ role: 'assistant', content: response });
+                addActivity(`${member.name} chatted with ${member.agent.name}`);
+                saveData();
+                renderChat();
+            } catch (error) {
+                document.getElementById('typingIndicator')?.remove();
+                member.messages.push({ role: 'assistant', content: `❌ Error: ${error.message}` });
+                saveData();
+                renderChat();
+            }
+        }
+
+        // Handle Enter key in chat input
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        });
+
+        // ==========================================
+        // AGENT CONFIGURATION
+        // ==========================================
+        
+        function openAgentConfig() {
+            const member = appData.teamMembers.find(m => m.id === appData.activeMemberId);
+            if (!member) return;
+
+            selectedAgentProviderId = member.agent.provider;
+            
+            document.getElementById('agentName').value = member.agent.name;
+            document.getElementById('agentSystemPrompt').value = member.agent.systemPrompt;
+            document.getElementById('agentTemperature').value = member.agent.temperature;
+            document.getElementById('tempValue').textContent = member.agent.temperature;
+            document.getElementById('agentMaxTokens').value = member.agent.maxTokens;
+            document.getElementById('agentApiKey').value = member.agent.apiKey || '';
+            document.getElementById('agentCustomEndpoint').value = member.agent.customEndpoint || '';
+
+            renderProviderGrid('agentProviderGrid', 'agentConfig');
+            updateProviderConfig(member.agent.provider, 'agentConfig');
+            openModal('agentConfigModal');
+        }
+
+        function saveAgentConfig() {
+            const member = appData.teamMembers.find(m => m.id === appData.activeMemberId);
+            if (!member) return;
+
+            member.agent.name = document.getElementById('agentName').value || `${member.name}'s Assistant`;
+            member.agent.provider = selectedAgentProviderId;
+            member.agent.model = document.getElementById('agentModel').value;
+            member.agent.apiKey = document.getElementById('agentApiKey').value;
+            member.agent.customEndpoint = document.getElementById('agentCustomEndpoint').value;
+            member.agent.systemPrompt = document.getElementById('agentSystemPrompt').value;
+            member.agent.temperature = parseFloat(document.getElementById('agentTemperature').value);
+            member.agent.maxTokens = parseInt(document.getElementById('agentMaxTokens').value);
+
+            addActivity(`Updated agent config for ${member.name}`);
+            saveData();
+            renderMembers();
+            renderChat();
+            closeModal('agentConfigModal');
+        }
+
+        // ==========================================
+        // TASK MANAGEMENT
+        // ==========================================
+        
+        function addTask() {
+            const title = document.getElementById('taskTitle').value.trim();
+            const priority = document.getElementById('taskPriority').value;
+            const assignee = document.getElementById('taskAssignee').value;
+
+            if (!title) {
+                alert('Please enter a task title');
+                return;
+            }
+
+            const task = {
+                id: Date.now().toString(),
+                title,
+                priority,
+                assignee,
+                completed: false,
+                createdAt: new Date().toISOString()
+            };
+
+            appData.tasks.push(task);
+            addActivity(`Created task: ${title}`);
+            saveData();
+            renderTasks();
+            closeModal('addTaskModal');
+            
+            document.getElementById('taskTitle').value = '';
+        }
+
+        function toggleTask(id) {
+            const task = appData.tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                addActivity(`${task.completed ? 'Completed' : 'Reopened'} task: ${task.title}`);
+                saveData();
+                renderTasks();
+            }
+        }
+
+        function deleteTask(id) {
+            appData.tasks = appData.tasks.filter(t => t.id !== id);
+            saveData();
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('taskList');
+            const activeTasks = appData.tasks.filter(t => !t.completed);
+            const completedTasks = appData.tasks.filter(t => t.completed);
+            
+            document.getElementById('totalTasks').textContent = appData.tasks.length;
+            document.getElementById('completedTasks').textContent = completedTasks.length;
+
+            if (appData.tasks.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No tasks yet</p>';
+                return;
+            }
+
+            list.innerHTML = [...activeTasks, ...completedTasks].map(task => {
+                const assignee = appData.teamMembers.find(m => m.id === task.assignee);
+                return `
+                    <div class="task-item ${task.priority} ${task.completed ? 'completed' : ''}">
+                        <div style="display: flex; align-items: flex-start; gap: 10px;">
+                            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask('${task.id}')" style="margin-top: 4px;">
+                            <div style="flex: 1;">
+                                <div class="task-title" style="${task.completed ? 'text-decoration: line-through;' : ''}">${escapeHtml(task.title)}</div>
+                                <div class="task-meta">
+                                    <span class="tag tag-${task.priority === 'high' ? 'primary' : 'success'}">${task.priority}</span>
+                                    ${assignee ? `<span>👤 ${assignee.name}</span>` : ''}
+                                </div>
+                            </div>
+                            <button class="btn btn-small btn-secondary" onclick="deleteTask('${task.id}')" title="Delete">✕</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==========================================
+        // ACTIVITY LOG
+        // ==========================================
+        
+        function addActivity(message) {
+            appData.activity.unshift({
+                id: Date.now().toString(),
+                message,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Keep only last 50 activities
+            appData.activity = appData.activity.slice(0, 50);
+        }
+
+        function renderActivity() {
+            const list = document.getElementById('activityList');
+            
+            if (appData.activity.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No activity yet</p>';
+                return;
+            }
+
+            list.innerHTML = appData.activity.slice(0, 10).map(activity => {
+                const date = new Date(activity.timestamp);
+                const timeAgo = getTimeAgo(date);
+                return `
+                    <div class="task-item" style="border-left-color: var(--secondary);">
+                        <div class="task-title">${escapeHtml(activity.message)}</div>
+                        <div class="task-meta"><span>${timeAgo}</span></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+            if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+            return `${Math.floor(seconds / 86400)}d ago`;
+        }
+
+        // ==========================================
+        // SETTINGS
+        // ==========================================
+        
+        function renderGlobalApiKeysSettings() {
+            const container = document.getElementById('globalApiKeysContainer');
+            if (!container) return;
+            
+            const categories = getProvidersByCategory();
+            let html = '';
+            
+            for (const [category, providers] of Object.entries(categories)) {
+                html += `<div class="panel-section-title" style="margin-top: 16px;">${category}</div>`;
+                html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px;">';
+                
+                for (const provider of providers) {
+                    if (provider.isLocal || provider.authType === 'none') continue;
+                    
+                    const hasKey = appData.settings.globalApiKeys[provider.id]?.length > 0;
+                    
+                    html += `
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" style="display: flex; align-items: center; gap: 8px;">
+                                <span>${provider.icon}</span>
+                                <span>${provider.name}</span>
+                                ${hasKey ? '<span style="color: var(--secondary); font-size: 0.7rem;">✓</span>' : ''}
+                            </label>
+                            <input type="password" 
+                                   class="form-input" 
+                                   id="globalKey_${provider.id}"
+                                   value="${appData.settings.globalApiKeys[provider.id] || ''}"
+                                   placeholder="${provider.keyPlaceholder}">
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function switchSettingsTab(tab) {
+            document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('keysTab').style.display = tab === 'keys' ? 'block' : 'none';
+            document.getElementById('generalTab').style.display = tab === 'general' ? 'block' : 'none';
+            document.getElementById('dataTab').style.display = tab === 'data' ? 'block' : 'none';
+        }
+
+        function saveSettings() {
+            // Save all global API keys
+            for (const providerId of Object.keys(AI_PROVIDERS)) {
+                const input = document.getElementById(`globalKey_${providerId}`);
+                if (input) {
+                    appData.settings.globalApiKeys[providerId] = input.value;
+                }
+            }
+            
+            appData.settings.defaultProvider = document.getElementById('defaultProvider').value;
+            
+            saveData();
+            closeModal('settingsModal');
+            renderProviderGrids();
+        }
+
+        function loadSettings() {
+            // Populate default provider dropdown
+            const defaultProviderSelect = document.getElementById('defaultProvider');
+            if (defaultProviderSelect) {
+                defaultProviderSelect.innerHTML = Object.entries(AI_PROVIDERS)
+                    .map(([id, p]) => `<option value="${id}" ${id === appData.settings.defaultProvider ? 'selected' : ''}>${p.icon} ${p.name}</option>`)
+                    .join('');
+            }
+            
+            renderGlobalApiKeysSettings();
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(appData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `team-ai-hub-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    appData = { ...appData, ...imported };
+                    initializeGlobalApiKeys();
+                    saveData();
+                    renderAll();
+                    renderProviderGrids();
+                    alert('Data imported successfully!');
+                } catch (error) {
+                    alert('Error importing data: Invalid JSON file');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearAllData() {
+            if (!confirm('Are you sure you want to clear all data? This cannot be undone.')) return;
+            
+            localStorage.removeItem(STORAGE_KEY);
+            appData = {
+                teamMembers: [],
+                tasks: [],
+                settings: {
+                    darkMode: true,
+                    defaultProvider: 'openai',
+                    globalApiKeys: {}
+                },
+                activity: [],
+                activeMemberId: null
+            };
+            initializeGlobalApiKeys();
+            renderAll();
+            renderProviderGrids();
+        }
+
+        // ==========================================
+        // UI HELPERS
+        // ==========================================
+        
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            if (id === 'settingsModal') loadSettings();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('tasksPanel').style.display = tab === 'tasks' ? 'block' : 'none';
+            document.getElementById('activityPanel').style.display = tab === 'activity' ? 'block' : 'none';
+            
+            if (tab === 'activity') renderActivity();
+        }
+
+        function toggleDarkMode() {
+            const toggle = document.getElementById('darkModeToggle');
+            toggle.classList.toggle('active');
+            appData.settings.darkMode = toggle.classList.contains('active');
+        }
+
+        function renderAll() {
+            renderMembers();
+            renderChat();
+            renderTasks();
+            renderActivity();
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            
+            // Close modals on overlay click
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://www.pencilandpaper.io/articles/ux-pattern-analysis-data-dashboards",
+    "name": "Dashboard Design UX Patterns Best Practices - Pencil & Paper",
+    "snippet": "Data dashboard UX is tricky, but hopefully we can help. In this article we'll share the dashboard design UX best practices we've learned over the years.",
+    "host_name": "www.pencilandpaper.io",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.designmonks.co/blog/side-drawer-ui",
+    "name": "Side Drawer UI: A Guide to Smarter Navigation - Design Monks",
+    "snippet": "Learn how to design a high-performing Side Drawer UI that improves navigation, user flow, and responsiveness across apps and dashboards.",
+    "host_name": "www.designmonks.co",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://dribbble.com/search/slide-out-panel",
+    "name": "Browse thousands of Slide Out Panel images for design inspiration | Dribbble",
+    "snippet": "Explore thousands of high-quality slide out panel images on Dribbble. Your resource to get inspired, discover and connect with designers worldwide. Missing: secondary positioning",
+    "host_name": "dribbble.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.eleken.co/blog-posts/modal-ux",
+    "name": "Mastering Modal UX: Best Practices & Real Product Examples - Eleken",
+    "snippet": "Learn how to design modals that enhance UX, not disrupt it. Real-world examples, best practices, and common mistakes to avoid.",
+    "host_name": "www.eleken.co",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://blog.uxtweak.com/user-flow-diagram",
+    "name": "Designing the Perfect User Flow Diagram - UXtweak",
+    "snippet": "Learn what a user flow diagram is, what it is used for and how to create a near perfect user flow diagram for your next project.",
+    "host_name": "blog.uxtweak.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.justinmind.com/ui-design/slide-menu",
+    "name": "Slide menu design guide with 15 awesome examples - Justinmind",
+    "snippet": "This guide is packed with helpful tips and examples to help you create beautiful and easy-to-use slide menus.",
+    "host_name": "www.justinmind.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://mobbin.com/glossary/drawer",
+    "name": "Drawer UI Design: Best practices, Design variants & Examples - Mobbin",
+    "snippet": "A drawer is a hidden panel that slides out from the edge of the screen, while a sidebar is a visible panel that is usually fixed on one side of the screen. Missing: dashboard positioning\nDrawer is a panel that enters from the edge of the screen to display supplementary content, it typically has a hamburger menu icon (or navigation menu icon) to ... Missing: dashboard positioning",
+    "host_name": "mobbin.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developer.adobe.com/commerce/admin-developer/pattern-library/containers/slideouts-modals-overlays",
+    "name": "Slide-out Panels, Modal Windows, and Overlays - Adobe Developer",
+    "snippet": "You can focus user attention on a specific bit of content, isolated action, process or sub-process by using a \"Slide-out Panel\", \"Modal Window\" or \"Overlay\" ... Missing: secondary | Show results with: secondary",
+    "host_name": "developer.adobe.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://userpilot.medium.com/11-user-flow-examples-how-to-inform-ux-design-with-them-e0aba228d42c",
+    "name": "11 User Flow Examples + How to Inform UX Design With Them | by Userpilot Team",
+    "snippet": "This article shows you 11 examples across different user journey stages. We also cover best practices to help you create logical user flows and develop ...",
+    "host_name": "userpilot.medium.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://dribbble.com/search/dashboard-side-drawer",
+    "name": "dashboard side drawer - Dribbble",
+    "snippet": "Explore thousands of high-quality dashboard side drawer images on Dribbble. Your resource to get inspired, discover and connect with designers worldwide. Missing: secondary positioning slide",
+    "host_name": "dribbble.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

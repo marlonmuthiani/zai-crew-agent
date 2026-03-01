@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://www.designrush.com/agency/ui-ux-design/trends/chatgpt-for-ui-ux-design",
+    "name": "How To Use ChatGPT for UI/UX Design (With Sample Prompts)",
+    "snippet": "Explore 16 ways to use ChatGPT for UI/UX design—from personas to wireframes — with expert tips, sample prompts, and real-world applications.",
+    "host_name": "www.designrush.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://uxplanet.org/ui-design-with-chatgpt-5-afc67dc501a1",
+    "name": "UI Design with ChatGPT 5 - UX Planet",
+    "snippet": "And the great thing is that you don’t need to switch from ChatGPT to any other tool to generate UI. In this article, I want to experiment with ChatGPT 5 and generate UI for a mobile application.",
+    "host_name": "uxplanet.org",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://duitdesign.com/how-to-use-chatgpt-for-user-interface-design.html",
+    "name": "How To Use Chatgpt For User Interface Design?",
+    "snippet": "In this article, we explore 25 examples of how to use ChatGPT for UI/UX design, including generating design ideas based on specific user personas or user journeys, creating a UI design checklist, and integrating it into UXPin workflows.",
+    "host_name": "duitdesign.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.geeksforgeeks.org/websites-apps/integrating-chatgpt-in-ui-ux-design",
+    "name": "Integrating ChatGPT in UI/UX Design - GeeksforGeeks",
+    "snippet": "One of the greatest advancements in UI design is the introduction of AI tools like Chat GPT. Now it has become easier for developers to design good UI with an understanding of users' needs.",
+    "host_name": "www.geeksforgeeks.org",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tutorialspoint.com/chatgpt/chatgpt-for-ui-ux-designer.htm",
+    "name": "ChatGPT for UI / UX Designers - Online Tutorials Library",
+    "snippet": "Discover how ChatGPT can enhance the workflow and creativity of UI/UX designers. Learn practical applications and tips for integrating AI into your design process.",
+    "host_name": "www.tutorialspoint.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.openai.com/apps-sdk/build/chatgpt-ui",
+    "name": "Build your ChatGPT UI",
+    "snippet": "This is the UI architecture built for ChatGPT Apps and later standardized as MCP Apps, so you can build once and run your UI across MCP Apps-compatible hosts. ChatGPT continues to support window.openai for Apps SDK compatibility and optional ChatGPT extensions.",
+    "host_name": "developers.openai.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://blog.logrocket.com/ux-design/chatgpt-ux",
+    "name": "19 ways to use ChatGPT in UX design (with sample prompts)",
+    "snippet": "UX design is not only about making pretty UI and choosing the right colors but also about building products that users actually love. Whether you are tasked with a more strategic challenge or want to proactively step up, ChatGPT can be a great tool for ideating the next areas of focus.",
+    "host_name": "blog.logrocket.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://infosecwriteups.com/the-day-ai-designed-a-better-dashboard-than-me-a-ui-ux-case-study-using-openai-tools-6b446b7eceb1",
+    "name": "The Day AI Designed a Better Dashboard Than Me: A UI/UX Case",
+    "snippet": "How a late-night experiment with ChatGPT and DALL·E completely upended my ego — and taught me what the future of design really looks like.",
+    "host_name": "infosecwriteups.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  }
+]
