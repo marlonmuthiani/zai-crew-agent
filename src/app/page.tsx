@@ -1713,8 +1713,8 @@ export default function TeamAIDashboard() {
                   <Bot className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg text-white">AI Hub</span>
-                  <p className="text-[10px] text-slate-400 -mt-0.5">Team Collaboration</p>
+                  <span className="font-bold text-lg text-white">AI Studio</span>
+                  <p className="text-[10px] text-slate-400 -mt-0.5">Intelligent Workspace</p>
                 </div>
               </div>
             )}
@@ -1902,7 +1902,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddMember(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Member
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Invite Teammate
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -1910,7 +1910,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddAgent(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Agent
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Build AI Agent
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -1918,7 +1918,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddBean(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Bean
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Launch New Task
                   </Button>
                 </div>
               </div>
@@ -1929,11 +1929,11 @@ export default function TeamAIDashboard() {
           {!sidebarCollapsed && (
             <div className="p-3 border-t border-slate-700 bg-slate-800/50 relative z-10">
               <div className="flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1.5 text-slate-300">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                  {teamMembers.length} members
+                <span className="flex items-center gap-1.5 text-slate-300 truncate">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shrink-0" />
+                  <span className="truncate">{teamMembers.length} members</span>
                 </span>
-                <span className="flex items-center gap-1.5 text-slate-300">
+                <span className="flex items-center gap-1.5 text-slate-300 shrink-0 ml-2">
                   <Zap className="h-3.5 w-3.5 text-amber-400" />
                   {agents.filter(a => a.status === 'active').length} active
                 </span>
