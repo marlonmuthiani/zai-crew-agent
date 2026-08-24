@@ -1902,7 +1902,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddMember(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Member
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Invite Teammate
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -1910,7 +1910,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddAgent(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Agent
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Deploy AI Agent
                   </Button>
                   <Button 
                     variant="ghost" 
@@ -1918,7 +1918,7 @@ export default function TeamAIDashboard() {
                     className="justify-start h-9 text-xs text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
                     onClick={() => setShowAddBean(true)}
                   >
-                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Add Bean
+                    <Plus className="h-3.5 w-3.5 mr-2 text-slate-400" /> Create Task (Bean)
                   </Button>
                 </div>
               </div>
@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-lg text-white mb-2">Welcome to your AI Workspace</h3>
+                          <p className="text-slate-400">I'm {activeMember.agent.name}, your dedicated AI companion. How can I assist you today?</p>
                         </CardContent>
                       </Card>
                     ) : (
