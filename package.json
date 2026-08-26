@@ -8,6 +8,7 @@
     "start": "NODE_ENV=production bun .next/standalone/server.js 2>&1 | tee server.log",
     "lint": "eslint .",
     "db:push": "prisma db push",
+    "db:seed": "bun prisma/seed.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset"
@@ -82,6 +83,9 @@
     "z-ai-web-dev-sdk": "^0.0.16",
     "zod": "^4.0.2",
     "zustand": "^5.0.6"
+  },
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
