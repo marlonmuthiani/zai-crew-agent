@@ -1714,7 +1714,7 @@ export default function TeamAIDashboard() {
                 </div>
                 <div>
                   <span className="font-bold text-lg text-white">AI Hub</span>
-                  <p className="text-[10px] text-slate-400 -mt-0.5">Team Collaboration</p>
+                  <p className="text-[10px] text-slate-400 -mt-0.5">Human & AI Collaboration</p>
                 </div>
               </div>
             )}
@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-lg text-white mb-2">Start a Workspace Conversation</h3>
+                          <p className="text-slate-400">Hello! I'm {activeMember.agent.name}, your intelligent AI partner. What exciting goals shall we accomplish together today?</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -2166,8 +2166,8 @@ export default function TeamAIDashboard() {
                 <Card className="max-w-md text-center">
                   <CardContent className="p-8">
                     <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="font-semibold text-xl mb-2">Team AI Hub</h3>
-                    <p className="text-muted-foreground mb-6">Add team members and assign AI agents</p>
+                    <h3 className="font-semibold text-xl mb-2">Team AI Workspace</h3>
+                    <p className="text-muted-foreground mb-6">Welcome! Add your team members and pair them with customized AI agents to accelerate productivity.</p>
                     <Button onClick={() => setShowAddMember(true)}><Plus className="h-4 w-4 mr-2" /> Add Member</Button>
                   </CardContent>
                 </Card>

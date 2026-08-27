@@ -23,6 +23,8 @@ node_modules
 # misc
 .DS_Store
 *.pem
+*.db
+*.log
 
 # debug
 npm-debug.log*
@@ -30,8 +32,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env
+.env.*
 
 # vercel
 .vercel
@@ -47,5 +50,7 @@ test
 prompt
 
 server.log
+dev_server.log
+
 # Skills directory
 /skills/
