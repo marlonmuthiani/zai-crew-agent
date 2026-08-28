@@ -2214,11 +2214,11 @@ export default function TeamAIDashboard() {
                   {agents.length === 0 ? (
                     <Card className="text-center py-12">
                       <CardContent>
-                        <BotMessageSquare className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                        <h3 className="font-semibold text-xl mb-2">No Agents Yet</h3>
-                        <p className="text-muted-foreground mb-6">Create your first AI agent with a custom personality</p>
+                        <BotMessageSquare className="h-16 w-16 mx-auto mb-4 text-muted-foreground text-primary/80" />
+                        <h3 className="font-semibold text-xl mb-2">Welcome to Your AI Crew</h3>
+                        <p className="text-muted-foreground mb-6">Bring your workspace to life by creating your first AI teammate tailored to your goals.</p>
                         <Button onClick={() => setShowAddAgent(true)}>
-                          <Plus className="h-4 w-4 mr-2" /> Create Agent
+                          <Plus className="h-4 w-4 mr-2" /> Assemble Your First Agent
                         </Button>
                       </CardContent>
                     </Card>
@@ -2630,7 +2630,7 @@ export default function TeamAIDashboard() {
                       <CardContent>
                         <div className="space-y-2 max-h-64 overflow-y-auto">
                           {agents.length === 0 ? (
-                            <div className="text-center text-muted-foreground py-4">No agents yet</div>
+                            <div className="text-center text-muted-foreground py-4">Your AI roster is currently empty. Add an agent to get started!</div>
                           ) : (
                             agents.map((agent) => (
                               <div key={agent.id} className="flex items-center justify-between p-2 rounded-lg bg-muted/50">
