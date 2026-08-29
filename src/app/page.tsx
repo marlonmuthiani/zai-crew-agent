@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-xl text-white mb-2">Welcome! Let's build something great together</h3>
+                          <p className="text-slate-300">I'm {activeMember.agent.name}, your intelligent AI collaborator. Ask me anything, assign a task, or let's brainstorm ideas!</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -2166,9 +2166,9 @@ export default function TeamAIDashboard() {
                 <Card className="max-w-md text-center">
                   <CardContent className="p-8">
                     <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="font-semibold text-xl mb-2">Team AI Hub</h3>
-                    <p className="text-muted-foreground mb-6">Add team members and assign AI agents</p>
-                    <Button onClick={() => setShowAddMember(true)}><Plus className="h-4 w-4 mr-2" /> Add Member</Button>
+                    <h3 className="font-semibold text-xl mb-2">Welcome to Team AI Hub</h3>
+                    <p className="text-muted-foreground mb-6">Bring your team together and pair everyone with custom AI agents to supercharge productivity.</p>
+                    <Button onClick={() => setShowAddMember(true)} className="bg-indigo-600 hover:bg-indigo-500 text-white"><Plus className="h-4 w-4 mr-2" /> Invite First Team Member</Button>
                   </CardContent>
                 </Card>
               </div>
