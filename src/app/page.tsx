@@ -155,7 +155,7 @@ function useAudioRecording() {
       setIsRecording(true);
     } catch (error) {
       console.error('Error starting recording:', error);
-      toast.error('Could not access microphone');
+      toast.error('Unable to access your microphone. Please check your browser permissions.');
     }
   }, []);
 
@@ -177,7 +177,7 @@ function useAudioRecording() {
       return data.text || '';
     } catch (error) {
       console.error('Transcription error:', error);
-      toast.error('Failed to transcribe audio');
+      toast.error('Speech transcription took longer than expected. Please try speaking again.');
       return '';
     }
   }, [audioBlob]);
