@@ -369,7 +369,7 @@ function AgentHierarchyView({
                 </div>
               ) : (
                 <p className="text-sm text-muted-foreground ml-4 border-l-2 border-muted pl-4">
-                  No subagents linked
+                  No subagents assigned yet. Link helper agents to expand this orchestrator's capabilities.
                 </p>
               )}
             </CardContent>
@@ -413,7 +413,7 @@ function AgentHierarchyView({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Link Subagent</DialogTitle>
-            <DialogDescription>Select a subagent to link to this main agent</DialogDescription>
+            <DialogDescription>Choose an agent to assist and execute tasks under this main orchestrator.</DialogDescription>
           </DialogHeader>
           <ScrollArea className="h-64">
             <div className="space-y-2 p-2">
@@ -434,7 +434,7 @@ function AgentHierarchyView({
                 </Button>
               ))}
               {unlinkedSubagents.length === 0 && (
-                <p className="text-center text-muted-foreground py-4">No unlinked subagents available</p>
+                <p className="text-center text-muted-foreground py-4">All available agents are already linked, or none are available to link.</p>
               )}
             </div>
           </ScrollArea>
@@ -471,7 +471,7 @@ function CommunicationLog({
         {communications.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No communications yet</p>
+            <p>Communication channel is quiet. Agent discussions will stream here in real time.</p>
           </div>
         ) : (
           communications.map((comm) => (
@@ -543,7 +543,7 @@ function OrchestrationSessionsView({
         {sessions.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <Workflow className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No orchestration sessions yet</p>
+            <p>No active coordination sessions. Start an agent session to watch them collaborate!</p>
           </div>
         ) : (
           sessions.map((session) => (
@@ -2184,7 +2184,7 @@ export default function TeamAIDashboard() {
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h2 className="text-2xl font-bold">AI Agents</h2>
-                      <p className="text-muted-foreground">Create and manage AI agents with hierarchy and orchestration</p>
+                      <p className="text-muted-foreground">Design, coordinate, and organize your intelligent AI agent workforce in one place.</p>
                     </div>
                     <div className="flex gap-2">
                       <div className="flex border rounded-lg">
@@ -2215,8 +2215,8 @@ export default function TeamAIDashboard() {
                     <Card className="text-center py-12">
                       <CardContent>
                         <BotMessageSquare className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                        <h3 className="font-semibold text-xl mb-2">No Agents Yet</h3>
-                        <p className="text-muted-foreground mb-6">Create your first AI agent with a custom personality</p>
+                        <h3 className="font-semibold text-xl mb-2">Your AI Team is Empty</h3>
+                        <p className="text-muted-foreground mb-6">Bring your workspace to life by creating your very first AI team member.</p>
                         <Button onClick={() => setShowAddAgent(true)}>
                           <Plus className="h-4 w-4 mr-2" /> Create Agent
                         </Button>
@@ -2399,8 +2399,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
+                      <h3 className="font-semibold text-xl mb-2">No Tasks in Queue</h3>
+                      <p className="text-muted-foreground mb-6">Beans represent actionable workflows. Create your first bean to assign work to your agents.</p>
                       <Button onClick={() => setShowAddBean(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Bean
                       </Button>
