@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                  <h3 className="font-semibold text-lg text-white mb-2">Welcome! Let's build together</h3>
+                  <p className="text-slate-400">I'm {activeMember.agent.name}, your dedicated AI assistant. Ask me anything or assign a task to get started!</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -2166,9 +2166,9 @@ export default function TeamAIDashboard() {
                 <Card className="max-w-md text-center">
                   <CardContent className="p-8">
                     <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="font-semibold text-xl mb-2">Team AI Hub</h3>
-                    <p className="text-muted-foreground mb-6">Add team members and assign AI agents</p>
-                    <Button onClick={() => setShowAddMember(true)}><Plus className="h-4 w-4 mr-2" /> Add Member</Button>
+                    <h3 className="font-semibold text-xl mb-2">Welcome to Team AI Hub</h3>
+                    <p className="text-muted-foreground mb-6">Empower your workflow by adding teammates and pairing them with tailored AI assistants.</p>
+                    <Button onClick={() => setShowAddMember(true)}><Plus className="h-4 w-4 mr-2" /> Add Team Member</Button>
                   </CardContent>
                 </Card>
               </div>
@@ -2215,8 +2215,8 @@ export default function TeamAIDashboard() {
                     <Card className="text-center py-12">
                       <CardContent>
                         <BotMessageSquare className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                        <h3 className="font-semibold text-xl mb-2">No Agents Yet</h3>
-                        <p className="text-muted-foreground mb-6">Create your first AI agent with a custom personality</p>
+                      <h3 className="font-semibold text-xl mb-2">No AI Agents Configured Yet</h3>
+                      <p className="text-muted-foreground mb-6">Design intelligent autonomous agents with custom personalities, capabilities, and system instructions.</p>
                         <Button onClick={() => setShowAddAgent(true)}>
                           <Plus className="h-4 w-4 mr-2" /> Create Agent
                         </Button>
@@ -2399,8 +2399,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
+                      <h3 className="font-semibold text-xl mb-2">No Tasks (Beans) Scheduled</h3>
+                      <p className="text-muted-foreground mb-6">Beans represent actionable work units. Create one to assign structured goals directly to your agent team.</p>
                       <Button onClick={() => setShowAddBean(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Bean
                       </Button>
