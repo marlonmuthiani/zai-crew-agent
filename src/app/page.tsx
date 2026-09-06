@@ -1713,8 +1713,8 @@ export default function TeamAIDashboard() {
                   <Bot className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg text-white">AI Hub</span>
-                  <p className="text-[10px] text-slate-400 -mt-0.5">Team Collaboration</p>
+                  <span className="font-bold text-lg text-white">AI Team Workspace</span>
+                  <p className="text-[10px] text-slate-400 -mt-0.5">Smart Agent Collaboration</p>
                 </div>
               </div>
             )}
@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-lg text-white mb-2">Welcome to your Smart AI Assistant</h3>
+                          <p className="text-slate-400">Hi there! I'm {activeMember.agent.name}. Ask me anything or assign a task to get started!</p>
                         </CardContent>
                       </Card>
                     ) : (
