@@ -1713,8 +1713,8 @@ export default function TeamAIDashboard() {
                   <Bot className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg text-white">AI Hub</span>
-                  <p className="text-[10px] text-slate-400 -mt-0.5">Team Collaboration</p>
+                  <span className="font-bold text-lg text-white">Team AI Crew</span>
+                  <p className="text-[10px] text-slate-400 -mt-0.5">Autonomous Collaboration Engine</p>
                 </div>
               </div>
             )}
@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-lg text-white mb-2">Welcome to Your AI Collaboration Space</h3>
+                          <p className="text-slate-400">I'm {activeMember.agent.name}, ready to assist you. How can we collaborate today?</p>
                         </CardContent>
                       </Card>
                     ) : (
@@ -2166,8 +2166,8 @@ export default function TeamAIDashboard() {
                 <Card className="max-w-md text-center">
                   <CardContent className="p-8">
                     <Users className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="font-semibold text-xl mb-2">Team AI Hub</h3>
-                    <p className="text-muted-foreground mb-6">Add team members and assign AI agents</p>
+                    <h3 className="font-semibold text-xl mb-2">Team AI Crew Studio</h3>
+                    <p className="text-muted-foreground mb-6">Assemble your AI workforce, assign intelligent roles, and streamline your team's workflow.</p>
                     <Button onClick={() => setShowAddMember(true)}><Plus className="h-4 w-4 mr-2" /> Add Member</Button>
                   </CardContent>
                 </Card>
