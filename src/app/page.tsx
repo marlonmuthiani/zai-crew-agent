@@ -226,7 +226,7 @@ function CommandPalette({
             onValueChange={setSearch}
           />
           <CommandList className="max-h-[300px]">
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>No matching commands found. Try typing another keyword!</CommandEmpty>
             {commands.map((group) => (
               <CommandGroup key={group.group} heading={group.group} className="p-2">
                 {group.items.map((item) => (
@@ -2051,8 +2051,8 @@ export default function TeamAIDashboard() {
                           <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-indigo-500 flex items-center justify-center">
                             <Bot className="h-8 w-8 text-white" />
                           </div>
-                          <h3 className="font-semibold text-lg text-white mb-2">Start a conversation</h3>
-                          <p className="text-slate-400">I'm {activeMember.agent.name}. How can I help?</p>
+                          <h3 className="font-semibold text-lg text-white mb-2">Ready when you are!</h3>
+                          <p className="text-slate-400">Hi there! I'm {activeMember.agent.name}. How can I collaborate with you today?</p>
                         </CardContent>
                       </Card>
                     ) : (
