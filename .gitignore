@@ -49,3 +49,7 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+# sqlite database
+*.db
+prisma/*.db
