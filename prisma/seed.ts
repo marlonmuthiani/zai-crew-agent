@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+/** Creates or updates the official PRD test user in the configured database. */
 async function main() {
   const testUser = await prisma.user.upsert({
     where: { email: 'zoozoo@zaazaa.com' },

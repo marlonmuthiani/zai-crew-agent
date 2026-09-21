@@ -188,6 +188,10 @@ function useAudioRecording() {
 // ============================================
 // COMMAND PALETTE COMPONENT
 // ============================================
+/**
+ * Renders a searchable command dialog that delegates navigation and open-state
+ * changes to its parent.
+ */
 function CommandPalette({ 
   open, 
   onOpenChange, 
@@ -596,6 +600,10 @@ function OrchestrationSessionsView({
 // ============================================
 // MAIN DASHBOARD COMPONENT
 // ============================================
+/**
+ * Renders the interactive AI Hub dashboard and coordinates its store state with
+ * the application's backend APIs.
+ */
 export default function TeamAIDashboard() {
   // Store
   const { teamMembers, activeMemberId, setActiveMember, addTeamMember, deleteTeamMember,
