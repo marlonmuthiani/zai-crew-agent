@@ -2338,11 +2338,11 @@ export default function TeamAIDashboard() {
               <div className="max-w-5xl mx-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold">Beans</h2>
-                    <p className="text-muted-foreground">Task management for AI agents</p>
+                    <h2 className="text-2xl font-bold text-foreground">Work Items & Task Beans</h2>
+                    <p className="text-muted-foreground">Track team goals, assign tasks to AI specialists, and watch progress unfold</p>
                   </div>
                   <Button onClick={() => setShowAddBean(true)}>
-                    <Plus className="h-4 w-4 mr-2" /> New Bean
+                    <Plus className="h-4 w-4 mr-2" /> New Work Bean
                   </Button>
                 </div>
 
@@ -2398,11 +2398,11 @@ export default function TeamAIDashboard() {
                 {filteredBeans.length === 0 ? (
                   <Card className="text-center py-12">
                     <CardContent>
-                      <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
+                      <Activity className="h-16 w-16 mx-auto mb-4 text-primary/70 animate-pulse" />
+                      <h3 className="font-semibold text-xl mb-2">Ready to kick off a new task?</h3>
+                      <p className="text-muted-foreground mb-6">No task beans match this view yet. Create one now to assign clear goals to your AI teammates!</p>
                       <Button onClick={() => setShowAddBean(true)}>
-                        <Plus className="h-4 w-4 mr-2" /> Create Bean
+                        <Plus className="h-4 w-4 mr-2" /> Create Work Bean
                       </Button>
                     </CardContent>
                   </Card>
