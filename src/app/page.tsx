@@ -2338,11 +2338,11 @@ export default function TeamAIDashboard() {
               <div className="max-w-5xl mx-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold">Beans</h2>
-                    <p className="text-muted-foreground">Task management for AI agents</p>
+                    <h2 className="text-2xl font-bold text-white">Task Beans</h2>
+                    <p className="text-slate-400">Manage, track, and delegate work streams to intelligent AI agents</p>
                   </div>
-                  <Button onClick={() => setShowAddBean(true)}>
-                    <Plus className="h-4 w-4 mr-2" /> New Bean
+                  <Button onClick={() => setShowAddBean(true)} className="bg-indigo-600 hover:bg-indigo-500 text-white font-medium">
+                    <Plus className="h-4 w-4 mr-2" /> Create Task Bean
                   </Button>
                 </div>
 
@@ -2351,11 +2351,11 @@ export default function TeamAIDashboard() {
                   {(['pending', 'queued', 'running', 'completed', 'failed'] as const).map((status) => {
                     const count = beans.filter(b => b.status === status).length;
                     const colors = {
-                      pending: 'text-gray-500',
-                      queued: 'text-blue-500',
-                      running: 'text-amber-500',
-                      completed: 'text-green-500',
-                      failed: 'text-red-500',
+                      pending: 'text-slate-400',
+                      queued: 'text-blue-400',
+                      running: 'text-amber-400',
+                      completed: 'text-emerald-400',
+                      failed: 'text-rose-400',
                     };
                     const icons = {
                       pending: Clock,
@@ -2366,11 +2366,11 @@ export default function TeamAIDashboard() {
                     };
                     const Icon = icons[status];
                     return (
-                      <Card key={status} className="cursor-pointer hover:shadow-md transition-all" onClick={() => setBeanFilter(status)}>
+                      <Card key={status} className="bg-slate-900 border-slate-800 cursor-pointer hover:border-indigo-500/50 transition-all" onClick={() => setBeanFilter(status)}>
                         <CardContent className="p-4 text-center">
                           <Icon className={cn('h-5 w-5 mx-auto mb-2', colors[status])} />
-                          <div className="text-2xl font-bold">{count}</div>
-                          <div className="text-xs text-muted-foreground capitalize">{status}</div>
+                          <div className="text-2xl font-bold text-white">{count}</div>
+                          <div className="text-xs text-slate-400 capitalize">{status}</div>
                         </CardContent>
                       </Card>
                     );
@@ -2380,29 +2380,29 @@ export default function TeamAIDashboard() {
                 {/* Bean Filter */}
                 <div className="flex items-center gap-2 mb-4">
                   <Select value={beanFilter} onValueChange={(v) => setBeanFilter(v as typeof beanFilter)}>
-                    <SelectTrigger className="w-[150px]">
+                    <SelectTrigger className="w-[180px] bg-slate-900 border-slate-800 text-slate-300">
                       <SelectValue placeholder="Filter by status" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Beans</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="queued">Queued</SelectItem>
-                      <SelectItem value="running">Running</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
-                      <SelectItem value="failed">Failed</SelectItem>
+                    <SelectContent className="bg-slate-900 border-slate-800 text-slate-200">
+                      <SelectItem value="all">All Task Beans</SelectItem>
+                      <SelectItem value="pending">Pending Review</SelectItem>
+                      <SelectItem value="queued">Queued for Execution</SelectItem>
+                      <SelectItem value="running">In Progress</SelectItem>
+                      <SelectItem value="completed">Successfully Completed</SelectItem>
+                      <SelectItem value="failed">Attention Required</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 {/* Bean List */}
                 {filteredBeans.length === 0 ? (
-                  <Card className="text-center py-12">
+                  <Card className="bg-slate-900 border-slate-800 text-center py-12">
                     <CardContent>
-                      <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
-                      <Button onClick={() => setShowAddBean(true)}>
-                        <Plus className="h-4 w-4 mr-2" /> Create Bean
+                      <Activity className="h-16 w-16 mx-auto mb-4 text-slate-600" />
+                      <h3 className="font-semibold text-xl text-white mb-2">No Task Beans Found</h3>
+                      <p className="text-slate-400 mb-6 max-w-md mx-auto">Create a task bean to assign autonomous actions, workflows, or research steps to your AI agents.</p>
+                      <Button onClick={() => setShowAddBean(true)} className="bg-indigo-600 hover:bg-indigo-500 text-white">
+                        <Plus className="h-4 w-4 mr-2" /> Create First Task Bean
                       </Button>
                     </CardContent>
                   </Card>
