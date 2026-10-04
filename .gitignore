@@ -24,6 +24,10 @@ node_modules
 .DS_Store
 *.pem
 
+# SQLite databases
+*.db
+*.db-journal
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -47,5 +51,6 @@ test
 prompt
 
 server.log
+
 # Skills directory
 /skills/
