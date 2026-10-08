@@ -2399,8 +2399,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
+                      <h3 className="font-semibold text-xl mb-2">No Beans in the Queue</h3>
+                      <p className="text-muted-foreground mb-6">Beans are smart, trackable tasks that your AI agents execute autonomously to save you time.</p>
                       <Button onClick={() => setShowAddBean(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Bean
                       </Button>
