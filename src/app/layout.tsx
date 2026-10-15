@@ -14,16 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Team AI Hub - 79 AI Providers Collaboration Dashboard",
-  description: "Multi-team AI collaboration dashboard with 79 AI providers support, voice input, secure API key management, and modern shadcn/ui interface.",
-  keywords: ["AI", "Team Collaboration", "LLM", "OpenAI", "Anthropic", "Z.ai", "OpenCode", "Voice Input", "shadcn/ui", "Next.js"],
+  title: "Team AI Hub - Next-Gen AI Collaboration & Agent Orchestration",
+  description: "Empowering team productivity with intelligent multi-agent orchestration, seamless workflow automation, real-time observability, and AI collaboration.",
+  keywords: ["AI", "Team Collaboration", "LLM", "Agent Orchestration", "Workflow Automation", "OpenAI", "Anthropic", "Z.ai", "shadcn/ui", "Next.js"],
   authors: [{ name: "Team AI Hub" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Team AI Hub - AI Collaboration Dashboard",
-    description: "Multi-team AI collaboration with 79 providers and secure voice-enabled interface",
+    title: "Team AI Hub - AI Collaboration & Orchestration",
+    description: "Empowering team productivity with intelligent multi-agent orchestration and voice-enabled collaboration.",
     type: "website",
   },
 };
