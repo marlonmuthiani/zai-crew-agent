@@ -1713,8 +1713,8 @@ export default function TeamAIDashboard() {
                   <Bot className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-bold text-lg text-white">AI Hub</span>
-                  <p className="text-[10px] text-slate-400 -mt-0.5">Team Collaboration</p>
+                  <span className="font-bold text-lg text-white">Team AI Hub</span>
+                  <p className="text-[10px] text-slate-400 -mt-0.5">Intelligent Collaboration</p>
                 </div>
               </div>
             )}
