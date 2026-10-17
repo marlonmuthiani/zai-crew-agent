@@ -43,9 +43,12 @@ local-*
 .claude
 .z-ai-config
 dev.log
+dev_server.log
 test
 prompt
 
 server.log
+*.db
+*.db-journal
 # Skills directory
 /skills/
