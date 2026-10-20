@@ -47,5 +47,7 @@ test
 prompt
 
 server.log
+*.db
+dev.db
 # Skills directory
 /skills/
