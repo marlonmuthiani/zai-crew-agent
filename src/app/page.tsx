@@ -471,7 +471,8 @@ function CommunicationLog({
         {communications.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No communications yet</p>
+            <p className="font-medium text-sm">No agent communications recorded yet</p>
+            <p className="text-xs text-slate-400 mt-1">Inter-agent messages and delegations will appear here in real time.</p>
           </div>
         ) : (
           communications.map((comm) => (
@@ -543,7 +544,8 @@ function OrchestrationSessionsView({
         {sessions.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <Workflow className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No orchestration sessions yet</p>
+            <p className="font-medium text-sm">No orchestration sessions active</p>
+            <p className="text-xs text-slate-400 mt-1">Assign multi-agent workflows to trigger live execution sessions.</p>
           </div>
         ) : (
           sessions.map((session) => (
@@ -2215,8 +2217,8 @@ export default function TeamAIDashboard() {
                     <Card className="text-center py-12">
                       <CardContent>
                         <BotMessageSquare className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                        <h3 className="font-semibold text-xl mb-2">No Agents Yet</h3>
-                        <p className="text-muted-foreground mb-6">Create your first AI agent with a custom personality</p>
+                        <h3 className="font-semibold text-xl mb-2">Assemble Your AI Squad</h3>
+                        <p className="text-muted-foreground mb-6">Create customizable AI agents to collaborate, solve complex tasks, and automate workflows together.</p>
                         <Button onClick={() => setShowAddAgent(true)}>
                           <Plus className="h-4 w-4 mr-2" /> Create Agent
                         </Button>
@@ -2399,8 +2401,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Activity className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Beans Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create beans to assign tasks to agents</p>
+                      <h3 className="font-semibold text-xl mb-2">No Active Beans in Queue</h3>
+                      <p className="text-muted-foreground mb-6">Create task beans to delegate research, analysis, or coding objectives to your AI team.</p>
                       <Button onClick={() => setShowAddBean(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Bean
                       </Button>
@@ -2786,8 +2788,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Clock className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Schedules Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create scheduled tasks to automate your workflow</p>
+                      <h3 className="font-semibold text-xl mb-2">Automate Recurring Tasks</h3>
+                      <p className="text-muted-foreground mb-6">Set up cron schedules or timed intervals to automatically run bean tasks and generate reports.</p>
                       <Button onClick={() => setShowAddSchedule(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Schedule
                       </Button>
@@ -2974,8 +2976,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Layers className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Plugins Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create plugins to extend the app's capabilities</p>
+                      <h3 className="font-semibold text-xl mb-2">Extend Your Platform Capabilities</h3>
+                      <p className="text-muted-foreground mb-6">Create custom plugins to run scripts, connect external tools, and supercharge your agents.</p>
                       <Button onClick={() => setShowAddPlugin(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Plugin
                       </Button>
@@ -3096,8 +3098,8 @@ export default function TeamAIDashboard() {
                   <Card className="text-center py-12">
                     <CardContent>
                       <Sparkles className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="font-semibold text-xl mb-2">No Skills Yet</h3>
-                      <p className="text-muted-foreground mb-6">Create skills to define agent capabilities</p>
+                      <h3 className="font-semibold text-xl mb-2">Empower Your Agents with Skills</h3>
+                      <p className="text-muted-foreground mb-6">Define deterministic or generative skills for your agents to execute specialized operations effortlessly.</p>
                       <Button onClick={() => setShowAddSkill(true)}>
                         <Plus className="h-4 w-4 mr-2" /> Create Skill
                       </Button>
