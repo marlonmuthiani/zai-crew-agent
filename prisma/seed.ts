@@ -2,6 +2,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/**
+ * Creates the launch test account or resets its name and plaintext password to
+ * the seed values when an account with the launch email already exists.
+ * Rejects if the database upsert fails.
+ */
 async function main() {
   const email = "zoozoo@zaazaa.com";
   const user = await prisma.user.upsert({
